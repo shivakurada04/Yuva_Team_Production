@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YUVA Team Profile - Manage your details and view your impact.">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>YUVA – Profile</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+     <nav aria-label="Main navigation"> 
+        <div class="logoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+            <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+        <ul class="menu" id="nav-menu">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About Us</a></li>
+            <li class="menuu"><span class="onhavour">What We Do</span>
+                <span><i class='bx bx-chevron-down down-arrow'></i></span> 
+                <ul class="dropdownmenu">
+                    <li><a href="{% url 'education' %}">School Education</a></li>
+                    <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                    <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                </ul>
+            </li>
+           <li><a href="{% url 'events' %}">Our Events</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li>
+    <button class="supportbtn">
+        <a href="{% url 'support' %}" style="color: white; text-decoration: none;">Support Us</a>
+    </button>
+</li>
+            <li><a href="{% url 'logout' %}" class="login" style="background-color: #d9534f; color: white;">Logout</a></li>
+        </ul>
+     </nav>
+    </header>    
+
+    <main>
+        <section class="pofile-section">
+            <div class="events-container">
+                <h1 class="page-title">My Profile</h1>
+
+                <div class="profile-wrapper">
+                    <aside class="sidebar">
+                        <ul>
+                            <li class="active" data-target="personal-details"><span>Personal Details</span></li>
+                            <li data-target="my-impact"><span>My Impact</span></li>
+                        </ul>
+                    </aside>
+
+                    <div class="profile-content-area">
+                        <div class="profile-card">
+                            <div class="profile-img-wrapper">
+                                <img id="displayProfileImg"
+                                     src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'assets/images/logo.png' %}{% endif %}"
+                                     alt="Profile Image"
+                                     onclick="document.getElementById('profileUpload').click()"
+                                     title="Click to change photo">
+                            </div>
+                            <form id="profilePicForm" method="POST" enctype="multipart/form-data" action="{% url 'user_profile' %}">
+                                {% csrf_token %}
+                                <input type="file" id="profileUpload" name="profile_picture" accept="image/*" hidden onchange="this.form.submit()">
+                            </form>
+                            
+                            <h3 id="profile-name" class="profile-name">{{ user.first_name }} {{ user.last_name }}</h3>
+                            <p class="member-since">Member since {{ user.date_joined|date:"Y" }}</p>
+                            <hr class="divider">
+                            <button class="btn btn-dark" onclick="openChangePasswordModal()">
+                                <i class='bx bxs-lock-alt'></i> Change Password
+                            </button>
+                            <a href="{% url 'logout' %}" class="btn btn-danger logout-btn" style="text-decoration:none;">Logout</a>
+                        </div>
+
+                        <div class="profile-main-content">
+                            <section id="personal-details" class="section show">
+                                <h3 class="section-heading">Personal Details</h3>
+                                <form method="POST" action="{% url 'user_profile' %}">
+                                    {% csrf_token %}
+                                    <div class="details-grid">
+                                        <div>
+                                            <label>First Name</label>
+                                            <input type="text" name="first_name" value="{{ user.first_name }}">
+                                        </div>
+                                        <div>
+                                            <label>Last Name</label>
+                                            <input type="text" name="last_name" value="{{ user.last_name }}">
+                                        </div>
+                                        <div>
+                                            <label>Email Address</label>
+                                            <input type="text" value="{{ user.email }}" readonly style="background-color: #f0f0f0;">
+                                        </div>
+                                        <div>
+                                            <label>Phone Number</label>
+                                            <input type="text" name="phone_number" value="{{ user.phone_number }}">
+                                        </div>
+                                        <div>
+                                            <label>Address / City</label>
+                                            <input type="text" name="address" value="{{ user.address|default:'' }}" placeholder="e.g. Hyderabad">
+                                        </div>
+                                        <div>
+                                            <label>Account Status</label>
+                                            <input type="text" value="{% if user.is_active %}Active{% else %}Inactive{% endif %}" readonly style="background-color: #f0f0f0;">
+                                        </div>
+                                    </div>
+                                    <div class="save-wrapper">
+                                        <button type="submit" class="btn btn-gold">Save Changes</button>
+                                    </div>
+                                </form>
+                            </section>
+
+                            <section id="my-impact" class="section">
+                                <h3 class="section-heading">My Impact</h3>
+                                <div class="dashbrdCards">
+                                    <div class="viewcard">
+                                        <p>Total Donated</p>
+                                        <span id="donationsTotal">₹ {{ total_donated|default:"0" }}</span>
+                                    </div>
+                                    <div class="viewcard">
+                                        <p>Events Attended</p>
+                                        <span id="eventsCount">0</span>
+                                    </div>
+                                </div>
+
+                                <div class="transaction-container">
+                                    <h4 class="sub-heading">Donation History</h4>
+                                    <div class="table-responsive">
+                                        <table class="transaction-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Transaction ID</th>
+                                                    <th>Cause</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="donationHistoryBody">
+                                                <tr>
+                                                    <td colspan="5" style="text-align:center;">No recent transactions found.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="passwordModal" class="membermodal">
+        <div class="modal-box">
+            <h3 class="modal-title">Change Password</h3>
+            <form id="password-form" method="POST" action="{% url 'user_profile' %}">
+                {% csrf_token %}
+                <input type="password" name="new_password" placeholder="New Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm New Password" required>
+                <div class="membermodal-actions">
+                    <button type="submit" class="btn btn-danger">Update</button>
+                    <button type="button" class="btn btn-dark" onclick="document.getElementById('passwordModal').style.display='none'">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+    <footer>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

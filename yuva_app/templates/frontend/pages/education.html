@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YUVA Team supports education by providing learning resources, school supplies, and assistance to students across Telangana.">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>Education Support Programs for Telangana Youth | YUVA</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+     <nav aria-label="Main navigation">
+        <div class="logoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+            <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+        <ul class="menu" id="nav-menu">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}"> About Us</a></li>
+                <li class="menuu"><span class="onhavour">What We Do</span>
+                    <span><i class='bx  bx-chevron-down down-arrow' ></i></span> 
+                    <ul class="dropdownmenu">
+                        <li><a href="{% url 'education' %}" class="active">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul>
+                </li>
+            <li><a href="{% url 'events' %}">Our Events</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+            
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'login' %}" class="login">Login</a></li>
+            {% endif %}
+        </ul>
+     </nav>
+    </header>    
+    <main>
+        <section class="edudes">
+            <h2>Education Initiatives</h2>
+            <p>At our organization, we believe that every child deserves access to quality education,   regardless of their financial background. Our education initiatives focus on providing essential learning resources, supporting students in need, and strengthening schools in underprivileged communities.
+            Through these programs, we aim to remove financial and material barriers so that children can learn, grow, and build a brighter future.</p>
+        </section>
+        <section class="notebook">
+            <div class="noteimg">
+                <img src="{% static 'assets/images/contactimage.webp' %}">
+            </div>
+            <div class="notedes"><h2>Notebook Donation Program</h2>
+            <p>Many children struggle to continue their studies due to the lack of basic stationery. Our Notebook Donation Program ensures that students receive the notebooks they need for writing class notes, completing homework, and staying academically organized.
+            This small yet meaningful support motivates children to stay engaged in their education.</p></div>
+        </section>
+        <section class="padsdistr animate-on-scroll slide-in-left">
+            <div class="padsdes"><h2>School Bag Distribution – Empowering Young Minds</h2>
+            <p>School bags are essential for students to carry their books and learning materials. Through our School Bag Distribution Drives, we support children in government and low-income schools, helping them stay organized and confident in their daily studies.</p></div>
+            <div class="padimg">
+                <img src="{% static 'assets/images/bagsdistritnimg.webp' %}">
+            </div>
+        </section>
+        <section class="twostdntcnt animate-on-scroll slide-in-up">
+            <div class="studntimg">
+               <img src="{% static 'assets/images/feeimage.webp' %}">
+            </div>
+            <div class="stdntdes"><h2>Stories of Educational Support</h2>
+            <p><span class="stdthl">Pradeepthi</span> and <span class="stdthl">Sampath </span>are two bright students whose educational journey was supported through our fee donation initiative. With timely financial assistance, they were able to continue their studies without interruption and focus on achieving their academic goals. This support reflects our commitment to ensuring that financial challenges never become a barrier to education.</p></div>
+        </section>
+        <section class="ysrcnt animate-on-scroll slide-in-left">
+            <div class="ysrdes"><h2>Fee Support Program - at YSR Bhongir</h2>
+            <p>Our organization, under the leadership of the Yuva Team, successfully conducted a fee distribution program at <span class="funthl">YSR Function Hall, Bhongir</span>.The initiative <span class="highlgtcnt">supported 22 economically </span>challenged students studying in various private schools of Bhongir town.An amount of <span class="highlgtcnt"> ₹2.5 lakhs was distributed as educational fee assistance</span>.The program was carried out in the presence of the Bhongir MP, Municipal Chairman, and Vice Chairman.This initiative reflects our commitment to ensuring equal access to education and a brighter future for students.</p></div>
+             <div class="ysrimg">
+                <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.39.42 PM.jpeg' %}">
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
+                            </div>
+
+                            <span class="close" onclick="closePopup()">×</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+            </div>
+        </div>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

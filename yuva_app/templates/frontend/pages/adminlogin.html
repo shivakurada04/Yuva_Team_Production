@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+        <section class="container">
+            <h1 class="loghead">Login</h1>
+            
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                
+                <div class="role-selection">
+                    <label><input type="radio" name="role" value="admin" required> Admin</label>
+                    <label><input type="radio" name="role" value="member" required> Member</label>
+                </div>
+                
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required />
+                <p class="disclaimer">Username must be 4-16 characters long and can include letters, numbers, and underscores.</p>
+                <p class="empty">Please fill this field</p>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required />
+                <i class='bx  bx-eye-closed '  id="eyeSlashIcon"></i>
+                <i class='bx  bx-eye'  id="eyeIcon"></i>
+                <p class="disclaimer">Password must be at least 8 characters & should contain special characters, numbers, and uppercase letters.</p>
+                <p class="empty1">Please fill this field</p>
+                
+                {% if error %}
+                <p class="fail" style="display:block; color: red; text-align: center; margin-top: 10px;">{{ error }}</p>
+                {% endif %}
+
+                <button type="submit" id="loginbtn">Login</button>
+            </form>
+            
+
+<div class="signup-link" style="text-align: center; margin-top: 15px; font-family: 'Open Sans', sans-serif;">
+    <p>Don't have an account? <a href="{% url 'support' %}" style="color: #e6cb00; font-weight: 700; text-decoration: none;">Sign Up</a></p>
+</div>
+
+
+            
+            <div class="linkbckfp">
+                <a href="{% url 'index' %}" class="backtohome">Back to Home</a>
+                
+                <a href="#" class="forget" onclick="alert('Please contact the admin to reset your password.')">Forgot Password?</a>
+            </div>
+        </section>
+    
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

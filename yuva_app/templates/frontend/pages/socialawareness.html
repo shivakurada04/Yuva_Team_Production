@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YUVA Team promotes social awareness through cleanliness drives, health initiatives, and environmental programs across Telangana.">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>Social Awareness Campaigns in Telangana | YUVA</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+     <nav aria-label="Main navigation">
+        <div class="logoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+            <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+        <ul class="menu" id="nav-menu">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}"> About Us</a></li>
+                <li class="menuu"><span class="onhavour">What We Do</span>
+                    <span><i class='bx  bx-chevron-down down-arrow' ></i></span> 
+                    <ul class="dropdownmenu">
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}" class="active">Social Awareness</a></li>
+                    </ul>
+                </li>
+            <li><a href="{% url 'events' %}">Our Events</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+            
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'login' %}" class="login">Login</a></li>
+            {% endif %}
+        </ul>
+     </nav>
+    </header>    
+    <main>
+        
+        <section class="hero-static"> 
+             <div class="hero-content">
+                <h1>Youth, Action & Community</h1>
+                <p>We believe in inspiring positive change through grassroots action, tackling issues from substance abuse to environmental responsibility.
+                 Through community engagement and youth empowerment, we create awareness, drive action, and foster sustainable impact.</p>
+             </div>
+        </section>
+        
+        <section class="social-intro animate-on-scroll slide-in-up">
+            <h2>Empowering Change Through Awareness Programs</h2>
+            <p>
+                Our Social Awareness initiatives focus on tackling critical community issues, promoting healthy living, and advocating for environmental responsibility. We mobilize youth and volunteers to lead various programs designed to educate, inspire, and drive collective action.
+            </p>
+        </section>
+        
+        <div>
+            <section class="program-section animate-on-scroll slide-in-right">
+                <div class="image-area">
+                    <div class="video-container" style="padding-bottom: unset; height: auto;">
+                        <video controls poster="{% static 'assets/images/5krunimg.webp' %}" style="width: 100%; border-radius: 1em;">
+                            <source src="{% static 'assets/videos/5k run video.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="content-area">
+                    <h3 class="runhead">Charity 5K Runs for a Cause</h3>
+                    <p class="runp">
+                        Our 5K Awareness Runs are organized to support critical social causes and create public consciousness through active participation. These runs have been conducted to stand in solidarity with 
+                        <strong>Bombay Bomb Blast Victims</strong>, promote <strong>Telangana state support initiatives</strong>, and spread awareness against 
+                        <strong>drug abuse</strong> and <strong>betting addictions</strong>. 
+                        Participants from all walks of life come together to run, walk, and raise their voice for meaningful social change.
+                    </p>
+                </div>
+            </section>
+            
+            <section class="program-section animate-on-scroll slide-in-left">
+                <div class="image-area">
+                    <img src="{% static 'assets/images/drug1.png' %}" alt="Young people attending a drug awareness seminar.">
+                </div>
+                <div class="content-area">
+                    <h3>2K Run – National Voters Day</h3>
+                    <p>
+                        To promote democratic values and responsible citizenship, we organize a 2K Awareness Run on the occasion of 
+                        <strong>National Voters Day</strong>. This initiative focuses on educating citizens—especially youth—about the 
+                        importance of voting, electoral participation, and exercising their democratic rights. 
+                        The event encourages first-time voters to actively engage in the nation’s democratic process.
+                    </p>
+                </div>
+            </section>
+
+            
+
+            <section class="program-section animate-on-scroll slide-in-left">
+                <div class="image-area stickyimage">
+                        <img class="slides" src="{% static 'assets/images/gogreen2.jpg' %}" alt="Volunteers planting trees in a park as part of a Go Green initiative.">
+                        <img class="slides" src="{% static 'assets/images/socialactvty.webp' %}" alt="Volunteers planting trees in a park as part of a Go Green initiative.">
+                    </div>
+                <div class="content-area">
+                    <h3 class="runhead">Go Green: Environmental Responsibility</h3>
+                    <p class="runp">
+                        We actively work to protect the environment through clean-up drives, tree plantation campaigns, and recycling awareness programs. Engaging the community in Go Green initiatives instills a sense of ownership and responsibility for our planet, fostering a cleaner and healthier environment for future generations.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
+                            </div>
+
+                            <span class="close" onclick="closePopup()">×</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+            </div>
+        </div>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="YUVA Team is dedicated to empowering youth and communities through education support, social awareness programs, and humanitarian initiatives in Telangana.">
+
+  <title>Our Events - YUVA</title>
+  <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/events.css' %}">
+  <link href="https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css" rel="stylesheet">
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header>
+  <nav aria-label="Main navigation">
+    <div class="logoname">
+      <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+      <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+    </div>
+
+    <div class="menu-toggle" id="menu-toggle">☰</div>
+
+    <ul class="menu">
+      <li><a href="{% url 'index' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About Us</a></li>
+
+      <li class="menuu">
+        <span class="onhavour">What We Do</span>
+        <i class='bx bx-chevron-down down-arrow'></i>
+        <ul class="dropdownmenu">
+          <li><a href="{% url 'education' %}">School Education</a></li>
+          <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+          <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+        </ul>
+      </li>
+
+      <li><a href="{% url 'events' %}" class="active">Our Events</a></li>
+      <li><a href="{% url 'contact' %}">Contact Us</a></li>
+
+      <li>
+        <button class="supportbtn">
+          <a href="{% url 'support' %}">Support Us</a>
+        </button>
+      </li>
+
+      {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+            {% else %}
+                <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+            {% endif %}
+      {% else %}
+            <li><a href="{% url 'login' %}" class="login">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="event-section">
+    <div class="event-container">
+
+      <h1 class="animate-on-scroll">Our Events</h1>
+      <p class="event-intro animate-on-scroll delay-100">
+        Capturing moments of impact through education, service, and community support.
+      </p>
+
+      <div id="dynamic-events-container" class="latest-updates animate-on-scroll delay-200">
+        <h2 class="section-title">Latest Updates</h2>
+        <div id="dynamic-grid"></div>
+      </div>
+
+      <div class="event-block animate-on-scroll delay-200" id="live-events">
+        <h2 class="section-title">Live Events</h2>
+
+        <div class="image-grid">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-12 at 8.32.56 PM.jpeg' %}" alt="Live Event">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-11 at 3.06.25 PM.jpeg' %}" alt="Live Event">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.08 PM.jpeg' %}" alt="Live Event">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.10 PM.jpeg' %}" alt="Live Event">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-11 at 3.06.23 PM.jpeg' %}" alt="Live Event">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.47.45 PM.jpeg' %}" alt="Live Event">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.12 PM (1).jpeg' %}" alt="Live Event">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.18 PM.jpeg' %}" alt="Live Event">
+        </div>
+
+        <p class="event-text">
+          Our live events bring communities together to support education, awareness, and social causes.
+        </p>
+      </div>
+
+      <div class="event-block animate-on-scroll" id="event-activities">
+        <h2 class="section-title">Event Activities</h2>
+
+        <div class="image-grid">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.39.42 PM.jpeg' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/cricket.JPG' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.09 PM (1).jpeg' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.07 PM.jpeg' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/socialactvty.webp' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/gogreen.jpg' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/DSC_0478.JPG' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/DSC05895.JPG' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/DSC04885.JPG' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/DSC_7193.JPG' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/DSC_0499.JPG' %}" alt="Event Activity">
+          <img src="{% static 'assets/images/Photo0138.jpg' %}" alt="Event Activity">
+        </div>
+
+        <p class="event-text">
+          From fee distribution programs to blood donation drives, every activity reflects our commitment to change.
+        </p>
+      </div>
+
+      <div class="event-block animate-on-scroll" id="newscoverage">
+        <h2 class="section-title">Media & Newspaper Coverage</h2>
+
+        <div class="image-grid">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.47.42 PM.jpeg' %}" alt="Newspaper Coverage">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.09 PM.jpeg' %}" alt="Newspaper Coverage">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.11 PM.jpeg' %}" alt="Newspaper Coverage">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.47.43 PM.jpeg' %}" alt="Newspaper Coverage">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.19 PM (1).jpeg' %}" alt="Newspaper Coverage">
+          <img src="{% static 'assets/images/20090125b_008122001.jpg' %}" alt="Newspaper Coverage">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.47.42 PM (1).jpeg' %}" alt="Newspaper Coverage">
+          <img src="{% static 'assets/images/WhatsApp Image 2026-01-15 at 10.40.07 PM (1).jpeg' %}" alt="Newspaper Coverage">
+        </div>
+
+        <p class="event-text">
+          Our initiatives have been recognized and highlighted by local media and newspapers.
+        </p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+    <div class="footerdetails">
+        <div class="footerlogoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+            <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+            <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+            <div class="footersocialmedia">
+                <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                <div id="callPopup" class="popup">
+                    <div class="popup-content">
+                        <h3>Contact Us</h3>
+                        <p id="phoneNumber">+91 9010455221</p>
+
+                        <div class="popup-actions">
+                            <a href="tel:+919010455221" class="btn call">Call</a>
+                            <button class="btn copy" onclick="copyNumber()">Copy</button>
+                        </div>
+
+                        <span class="close" onclick="closePopup()">×</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footconmenu">
+            <ul class="footmenu">
+                <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                <ul>
+                    <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                    <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                    <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                    <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                    <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                    <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                </ul></li>
+                <li><span>WHAT WE DO</span><ul>
+                    <li><a href="{% url 'education' %}">School Education</a></li>
+                    <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                    <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                </ul></li>
+                <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                    <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                    <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                    <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                </ul></li>
+                <li><span>GET IN TOUCH</span>
+                    <ul>
+                    <li><a href="{% url 'support' %}">Support Us</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    </ul>
+                </li>
+            </ul>
+             <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+        </div>
+    </div>
+    <div class="copyrights">
+      <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+      <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+      <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YUVA Team organizes blood donation drives to support healthcare needs and save lives across Telangana. Join us in making a difference.">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>Blood Donation</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+     <nav aria-label="Main navigation">
+        <div class="logoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+            <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+        <ul class="menu" id="nav-menu">
+            <li><a href="{% url 'index' %}">Home</a></li>
+             <li><a href="{% url 'about' %}"> About Us</a></li>
+                <li class="menuu"><span class="onhavour">What We Do</span>
+                    <span><i class='bx  bx-chevron-down down-arrow' ></i></span> 
+                    <ul class="dropdownmenu">
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}" class="active">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'events' %}">Our Events</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+            
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'login' %}" class="login">Login</a></li>
+            {% endif %}
+        </ul>
+     </nav>
+    </header>    
+    <main>
+
+        <section class="edudes">
+            <h2>Our Blood Donation Initiatives</h2>
+            <p>
+                Blood donation is one of the most direct and powerful ways to save lives. At YUVATEAM, we regularly organize blood donation camps in collaboration with local hospitals and blood banks to ensure a stable supply of safe blood for patients in need. 
+                We believe in fostering a culture of voluntary blood donation in our community.
+            </p>
+        </section>
+
+        <section class="notebook">
+            <div class="noteimg">
+                <img src="{% static 'assets/images/IMG-20200505-WA0071.jpg' %}" alt="Image of a successful blood donation drive with happy volunteers.">
+            </div>
+            <div class="notedes animate-on-scroll slide-in-up bldcntn">
+                <h2>Organizing Community Blood Drives</h2>
+                <p class="bldcmnty">
+                    We host multiple blood donation camps throughout the year, making it easy for citizens to contribute to this life-saving cause. These drives are held in accessible community locations, promoting widespread participation and awareness. Every unit collected helps save up to three lives.
+                </p>
+                <p>
+                    <a href="{% url 'contact' %}" class="blood-button1">View Upcoming Drives <span class="arrw">&#10095;</span></a>
+                </p>
+            </div>
+        </section>
+
+        <section class="padsdistr">
+            <div class="padsdes animate-on-scroll slide-in-up">
+                <h2>Raising Awareness on Safe Donation</h2>
+                <p>
+                   Beyond organizing camps, we educate the public about the importance of regular blood donation and dispel common myths. Our campaigns explain eligibility, the simple donation process, and the critical need for all blood types.
+                <p>
+                    We inspire youth to become lifelong voluntary donors, helping build a resilient and self-sufficient blood supply system.
+                </p>
+            </div>
+            <div class="bldimg">
+                <img src="{% static 'assets/images/raising.png' %}" alt="Poster or graphic promoting blood donation awareness.">
+            </div>
+        </section>
+
+        <section class="aboutjoin animate-on-scroll slide-in-up head">
+            <h2>Ready to Be a Lifesaver?</h2>
+            <p class="bldcmnty">
+                Becoming a blood donor is a heroic act of kindness. Check your eligibility and register your interest to be notified of our next drive.
+            </p>
+            <a href="{% url 'contact' %}" class="blood-button2">Register to Donate <span class="arrw">&#10095;</span></a>
+        </section>
+
+    </main>
+    <footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
+                            </div>
+
+                            <span class="close" onclick="closePopup()">×</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+            </div>
+        </div>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

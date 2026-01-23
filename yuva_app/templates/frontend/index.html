@@ -1,0 +1,255 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YUVA Team empowers communities in Telangana through education support, blood donation drives, social awareness programs, and youth development initiatives.">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>Youth Empowerment Programs in Telangana | YUVA</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+     <nav aria-label="Main navigation">
+        <div class="logoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+            <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+        <ul class="menu" id="nav-menu">
+            <li><a href="{% url 'index' %}" class="active">Home</a></li>
+            <li><a href="{% url 'about' %}"> About Us</a></li>
+            <li class="menuu"><span class="onhavour"> What We Do </span> 
+                    <span>
+                        <i class='bx  bx-chevron-down down-arrow' ></i>
+                    </span> 
+                <ul class="dropdownmenu">
+                    <li><a href="{% url 'education' %}">School Education</a></li>
+                    <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                    <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'events' %}">Our Events</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+            
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'login' %}" class="login">Login</a></li>
+            {% endif %}
+        </ul>
+     </nav>
+    </header>    
+
+    <main>
+        
+        <section class="hero-slideshow">
+            <div class="slides-container">
+                
+                <div class="slide active" style="background-image: url('{% static 'assets/images/contactimage.webp' %}');">
+                    <div class="hero-content">
+                        <h1>Empowering Lives, Inspiring Change.</h1>
+                    </div>
+                </div>
+
+                <div class="slide" style="background-image: url('{% static 'assets/images/feeimage.webp' %}');">
+                    <div class="hero-content">
+                        <h1>Support Education, Build Futures.</h1>
+                    </div>
+                </div>
+
+                <div class="slide" style="background-image: url('{% static 'assets/images/bagsdistritnimg.webp' %}');">
+                    <div class="hero-content">
+                        <h1>Together We Make a Difference.</h1>
+                    </div>
+                </div>
+
+                <div class="slide" style="background-image: url('{% static 'assets/images/covidimage.webp' %}');">
+                    <div class="hero-content">
+                        <h1>Join Us in Uplifting Communities.</h1>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <section class="home-about">
+            <div class="home-container">
+                <h2>Who We Are</h2>
+                <p>Yuva is a non-profit social organization founded in 2009 by a group of passionate individuals who shared a common dream — to create a positive difference in society. We are dedicated to supporting education, empowering youth, and helping people in need.</p>
+                <a href="{% url 'about' %}" class="home-button">Learn More About Us</a>
+            </div>
+        </section>
+
+        <section class="home-what-we-do">
+            <div class="home-container">
+                <h2>What We Do</h2>
+                <div class="what-we-do-cards">
+                    
+                    <div class="card animate-on-scroll slide-in-left">
+                        <div class="card-inner">
+                            <div class="card-cover">
+                                <i class='bx bxs-graduation'></i>
+                                <h3>Education</h3>
+                            </div>
+                            <div class="card-content">
+                                <h3>Education</h3>
+                                <p>Providing essential learning materials, notebooks, textbooks, and fee assistance to underprivileged students.</p>
+                                <a href="{% url 'education' %}">View More</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card animate-on-scroll slide-in-up">
+                        <div class="card-inner">
+                            <div class="card-cover">
+                                <i class='bx bxs-donate-heart'></i>
+                                <h3>Community Help</h3>
+                            </div>
+                            <div class="card-content">
+                                <h3>Community Help</h3>
+                                <p>Organizing donation drives for daily essentials, clothes, and groceries to support families and individuals in need.</p>
+                                <a href="{% url 'support' %}">View More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card animate-on-scroll slide-in-right">
+                        <div class="card-inner">
+                            <div class="card-cover">
+                                <i class='bx bxs-group'></i>
+                                <h3>Social Awareness</h3>
+                            </div>
+                            <div class="card-content">
+                                <h3>Social Awareness</h3>
+                                <p>Conducting clean-up campaigns, tree plantations, and health camps to promote community well-being and environmental care.</p>
+                                <a href="{% url 'social_awareness' %}">View More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="home-impact">
+            <div class="home-container">
+                <h2>Our Impact</h2>
+                <div class="impact-stats">
+                    <div class="stat animate-on-scroll slide-in-left">
+                        <i class='bx bxs-calendar-check'></i>
+                        <h3 class="counter" data-target="15">0</h3>
+                        <p>Years of Service</p>
+                    </div>
+                    <div class="stat animate-on-scroll slide-in-up">
+                        <i class='bx bxs-school'></i>
+                        <h3 class="counter" data-target="1200">0</h3>
+                        <p>Students Supported</p>
+                    </div>
+                    <div class="stat animate-on-scroll slide-in-right">
+                        <i class='bx bxs-heart'></i>
+                        <h3 class="counter" data-target="100">0</h3>
+                        <p>Active Volunteers</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-cta">
+            <div class="home-container">
+                <h2>Be a Part of the Change</h2>
+                <p>Whether you want to volunteer, contribute resources, or collaborate with us, Yuva welcomes everyone who believes in making a difference.</p>
+                <a href="{% url 'contact' %}" class="home-button-cta">Get Involved</a>
+            </div>
+        </section>
+
+    </main>
+    <footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
+                            </div>
+
+                            <span class="close" onclick="closePopup()">×</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+            </div>
+        </div>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <div id="subscribePopup" class="subscribe-overlay">
+        <div class="subscribe-content">
+            <span class="close-subscribe" id="closeSubscribe">&times;</span>
+            <h2>Join YUVA Team</h2>
+            <p>Subscribe to our newsletter to get the latest updates on our events, drives, and social work.</p>
+            <form id="subscribeForm">
+                <input type="email" id="subEmail" placeholder="Enter your email address" required>
+                <button type="submit">Subscribe Now</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

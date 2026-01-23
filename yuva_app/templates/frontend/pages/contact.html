@@ -1,0 +1,186 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact YUVA Team to connect, volunteer, or collaborate in education support, blood donation drives, and social awareness initiatives across Telangana.">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>Contact YUVA – Volunteer, Donate & Collaborate</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+     <nav aria-label="Main navigation">
+        <div class="logoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+            <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+        
+        <ul class="menu" id="nav-menu">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}"> About Us</a></li>
+            <li class="menuu"><span class="onhavour">What We Do </span>
+                    <span><i class='bx  bx-chevron-down down-arrow' ></i></span> 
+                <ul class="dropdownmenu">
+                    <li><a href="{% url 'education' %}">School Education</a></li>
+                    <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                    <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'events' %}">Our Events</a></li>
+            <li><a href="{% url 'contact' %}" class="active">Contact Us</a></li>
+            <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+            
+            {% if user.is_authenticated %}
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+                {% endif %}
+            {% else %}
+                <li><a href="{% url 'login' %}" class="login">Login</a></li>
+            {% endif %}
+        </ul>
+     </nav>
+    </header>    
+    <main>
+        <section class="image-slide">
+            <h1>Contact Us</h1>
+            <img class="slides" src="{% static 'assets/images/feeimage.webp' %}" alt="Volunteers giving financial support and checks to students for their education through our social organization.">
+        </section>
+        <section class = "contact">
+            <div class="contactdetails">
+                <p class="question">Have questions? We’re here to help.</p>
+                <div class="loc-mail">
+                    <div class="location">
+                        <div>
+                            <i class='bx  bxs-location'  ></i> 
+                        </div>
+                        <div>
+                            <p>Meena Nagar, Bhongir, Yadadri Bhuvanagiri, Telangana, 508116</p>
+                        </div>
+                    </div>
+                    <div class="email">
+                        <div>
+                            <i class='bx  bxs-envelope'  ></i> 
+                        </div>
+                        <div>
+                            <p>yuvateam2009@gmail.com</p>
+                        </div> 
+                    </div>    
+                    <div class="contactphn">   
+                        <div>
+                            <i class='bx  bxs-phone'  ></i> 
+                        </div>  
+                        <div>
+                            <p>+91 9010455221</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="animate-on-scroll slide-in-up contact-form">
+    <form id="contact-form" method="POST" action="{% url 'contact' %}">
+        {% csrf_token %}
+        <div>
+            <h3>Provide your details below, and we’ll connect with you to make a difference together.</h3>
+        </div>
+        <div class="contact-grid">
+            <div>
+                <label for="firstname">First Name<span class="mandatoryfield">*</span></label>
+                <input type="text" id="firstname" name="first_name" placeholder="John" required>
+            </div>
+            <div>
+                <label for="lastname">Last Name<span class="mandatoryfield">*</span></label>
+                <input type="text" id="lastname" name="last_name" placeholder="Leo" required>
+            </div>
+            <div>
+                <label for="email">Email ID<span class="mandatoryfield">*</span></label>
+                <input type="email" id="email" name="email" placeholder="john@gmail.com" required>
+            </div>
+            <div>
+                <label for="phone">Phone Number</label> 
+                <input type="tel" id="phone" name="phone">
+            </div>
+             <div class="sub-grid">
+                <label for="message">Message<span class="mandatoryfield">*</span></label>
+                <textarea id="message" name="message" cols="10" rows="4" placeholder="Drop Your Message" required></textarea>
+            </div>
+        </div>
+        
+        <button type="submit" class="formsubmit">Submit</button>
+    </form>
+    
+    <div id="toast-container"></div>
+</div>
+        </section>
+    </main>
+    <footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
+                            </div>
+
+                            <span class="close" onclick="closePopup()">×</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+            </div>
+        </div>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>

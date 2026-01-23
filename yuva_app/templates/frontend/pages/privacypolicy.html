@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+        <title>Privacy Policy</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+        <nav aria-label="Main navigation">
+            <div class="logoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+                <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+            </div>
+            <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+            <ul class="menu" id="nav-menu">
+                <li><a href="{% url 'index' %}">Home</a></li>
+                <li><a href="{% url 'about' %}"> About Us</a></li>
+                <li class="menuu"><span class="onhavour">What We Do</span> 
+                        <span>
+                            <i class='bx  bx-chevron-down down-arrow' ></i>
+                        </span> 
+                    <ul class="dropdownmenu">
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul>
+                </li>
+                <li><a href="{% url 'events' %}">Our Events</a></li>
+                <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+                
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+                    {% else %}
+                        <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+                    {% endif %}
+                {% else %}
+                    <li><a href="{% url 'login' %}" class="login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        </header>    
+        <main>
+            <div class="privacycontent">
+                <h1>Privacy Policy</h1>
+                <p class="content">Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect the personal information of individuals who visit our website or participate in our programs.</p>
+                <h3>1. Information Collection</h3>
+                <p class="content">We may collect personal information such as name, email address, phone number, and donation details when you:</p>
+                <ul>
+                    <li>Sign up for newsletters or updates</li>
+                    <li>Make donations or contributions</li>
+                    <li>Contact us for inquiries</li>
+                </ul>
+                <h3>2. Use of Information</h3>
+                <p class="content">The information collected is used solely to:</p>
+                <ul>
+                    <li>Process donations and funding</li>
+                    <li>Communicate important updates and information</li>
+                    <li>Improve our programs and services</li>
+                    <li>Comply with legal and regulatory requirements</li>
+                </ul>
+                <h3>3. Information Sharing</h3>
+                <p class="content">We do not sell, rent, or trade personal information to third parties. Information may only be shared with trusted partners directly involved in program implementation, and strictly for legitimate purposes.</p>
+                <h3>4. Data Security</h3>
+                <p class="content">We implement appropriate technical and organizational measures to protect personal data against unauthorized access, alteration, disclosure, or destruction.</p>
+                <h3>5. Cookies</h3>
+                <p class="content">Our website may use cookies to enhance user experience. Cookies are small data files stored on your device to help us analyze web traffic and improve site functionality.</p>
+                <h3>6. Your Rights</h3>
+                <p class="content">You have the right to access, correct, or request deletion of your personal information at any time by contacting us at <a href="mailto:yuvateam2009@gmail.com">yuvateam2009@gmail.com</a></p>
+                <h3>7. Changes to this Policy</h3>
+                <p class="content">We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated date.</p>
+            </div>
+        </main>
+        <footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
+                            </div>
+
+                            <span class="close" onclick="closePopup()">×</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+            </div>
+        </div>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+        <script src="{% static 'js/script1.js' %}" defer></script>
+    </body>
+</html>

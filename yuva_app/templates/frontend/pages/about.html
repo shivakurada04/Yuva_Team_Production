@@ -1,0 +1,219 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="YUVA Team is dedicated to empowering youth and communities through education support, social awareness programs, and humanitarian initiatives in Telangana.">
+    <link rel="icon" href="{% static 'assets/images/logo.png' %}">
+    <title>About YUVA – Education & Youth Development Programs</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+     <nav aria-label="Main navigation"> 
+        <div class="logoname">
+            <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
+            <h1>YUV<span class="letterspan">A</span>TEAM</h1>
+        </div>
+        <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
+        <ul class="menu" id="nav-menu">
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'about' %}" class="active">About Us</a></li>
+            <li class="menuu"><span class="onhavour">What We Do</span>
+                    <span><i class='bx  bx-chevron-down down-arrow' ></i></span> 
+                    <ul class="dropdownmenu">
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul>
+            </li>
+           <li><a href="{% url 'events' %}">Our Events</a></li>
+            <li><a href="{% url 'contact' %}">Contact Us</a></li>
+            
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'support' %}" class="supportbtn">Donate</a></li>
+                {% if user.is_staff %}
+                    <li><a href="{% url 'admin_dashboard' %}" class="login">Dashboard</a></li>
+                {% else %}
+                    <li><a href="{% url 'user_profile' %}" class="login">Profile</a></li>
+                {% endif %}
+            {% else %}
+                <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+                <li><a href="{% url 'login' %}" class="login">Login</a></li>
+            {% endif %}
+        </ul>
+     </nav>
+    </header>    
+    
+    <main>
+        <section>
+            <div class="manualslides">
+                <div class="mySlides">
+                        <h1>About Us</h1>
+                        <img src="{% static 'assets/images/aboutimg5.webp' %}">
+                </div>
+            </div>
+        </section>
+        
+        <section class="aboutoverview" id="overview">
+            <div>
+                <h2>Overview</h2>
+                <p class="over">Yuva is a non-profit social organization founded in 2009 by a group of passionate individuals who shared a common dream — to create a positive difference in society.
+                What started as a small team with big hearts has grown into a community-driven organization dedicated to <span class="abouttextcolor1">supporting education,</span> <span class="abouttextcolor1">empowering youth,</span> <span class="abouttextcolor1">and helping people in need.</span></p>
+                
+                <div class="abouteach_img">
+                    <div>
+                        <p class="stickyline"></p>
+                    </div>
+                    
+                    <div class="abouteach">
+                        <h2>Educational Support</h2>   
+                        <p>Education is the foundation of growth, and we believe no child should be left behind because of financial struggles.
+                        Yuva identifies students from underprivileged backgrounds and provides them with essential learning materials such as notebooks, textbooks, exam pads, pens, and school bags.</p>
+                        <p>We also support children who face difficulties in paying school or college fees by offering funding assistance through contributions from well-wishers and community donors.</p>
+                        
+                        <h2>Funding Assistance</h2>
+                        <p>Many young students with talent and determination are forced to discontinue their education due to a lack of financial support. Yuva steps in to bridge that gap.
+                        Through our funding programs, we sponsor school and tuition fees, help with exam registration costs, and provide educational tools or uniforms when needed.</p>
+                        
+                        <h2>Community Help & Welfare</h2>
+                        <p>Yuva works actively to support families in need by providing daily essentials, clothes, groceries, and hygiene materials.
+                        We organize donation drives and distribute basic necessities to low-income households, elderly individuals, and people facing hardship.</p>
+                        
+                        <h2>Health & COVID-19 Relief</h2>
+                        <p>Health is a vital part of community well-being, and Yuva has consistently taken steps to promote health awareness and support.
+                        During the COVID-19 pandemic, our team worked tirelessly to provide food packets, masks, sanitizers, and medicines to affected families and frontline workers.</p>
+                        
+                        <h2>Social and Environmental Work</h2>
+                        <p id="vision">Yuva believes that protecting the environment is as important as uplifting people.
+                        We regularly conduct clean-up campaigns, tree plantation drives, and environmental awareness events in schools and public places.</p>
+                    </div>
+                    
+                    <div class="stickyimage">
+                        <img class="slides" src="{% static 'assets/images/contactimage.webp' %}" alt="Volunteers distributing books">
+                        <img class="slides" src="{% static 'assets/images/feeimage.webp' %}" alt="Volunteers giving financial support">
+                        <img class="slides" src="{% static 'assets/images/bagsdistritnimg.webp' %}" alt="School bag distribution">
+                        <img class="slides" src="{% static 'assets/images/covidimage.webp' %}" alt="COVID-19 relief efforts">
+                        <img class="slides" src="{% static 'assets/images/5krunimg.webp' %}" alt="Charity 5K run event">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="aboutvismission animate-on-scroll slide-in-up">
+            <div class="aboutvision">
+                    <div>
+                        <h3>Our Vision</h3>
+                        <p id="mission">To create a society where every person, especially the youth, has the strength, opportunity, and motivation to shape a better and more inclusive future.</p>
+                    </div>
+                    <img src="{% static 'assets/images/Screenshot__48_-removebg-preview.png' %}">
+            </div>
+            <div class="aboutmission">
+                <img src="{% static 'assets/images/Screenshot__46_-removebg-preview.png' %}">
+                <div>
+                <h3>Our Mission</h3>
+                <p id="story">To empower young minds and uplift communities by promoting education, equality, and social responsibility.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="aboutstory animate-on-scroll slide-in-up">
+            <h2 id="impact">Our Story</h2>
+            <p>The journey of Yuva began when a small group of friends decided to take action instead of waiting for change. They started by helping students who couldn’t afford school essentials and later extended their efforts to broader social causes.</p>
+        </section>
+
+        <section class="aboutimpact animate-on-scroll slide-in-up" id="founder">
+            <h2>Our Impact</h2>
+            <p>Yuva has reached hundreds of students and families through its initiatives — spreading hope, kindness, and opportunity where it’s needed most.</p>
+        </section>
+
+        <section class="aboutfounder animate-on-scroll slide-in-up">
+            <div>
+                <h2 id="team">Founder Words</h2>
+                <p>“I believe that education is the strongest foundation for meaningful change. Through this organization, my vision is to empower young minds, support underserved communities, and create opportunities that inspire confidence, equality, and hope."</p>
+            </div>
+            <div class="found">
+            <img src="{% static 'assets/images/WhatsApp Image 2026-01-11 at 3.04.09 PM.jpeg' %}">
+            <p class="founder-name">Sudhagani Raju</p>
+            <p class="desg">Founder & Convenor</p>
+            </div>
+        </section>
+
+        <section class="aboutteam animate-on-scroll slide-in-up">
+            <h2>Our Team</h2>
+            <p>Our strength lies in our team of passionate volunteers, coordinators, and youth leaders who dedicate their time and energy to serve society.</p>
+        </section>
+
+        <section class="aboutjoin animate-on-scroll slide-in-up" id="join">
+            <h2>Join Us</h2>
+            <p>Be a part of the change! Whether you want to volunteer, contribute resources, or collaborate with us, Yuva welcomes everyone who believes in making a difference. <span class="aboutjoinquote">Yuva — Empowering Lives, Inspiring Change.</span></p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p>
+                
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"></a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"></a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"></a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"></a>
+                    
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
+                            </div>
+                            <span class="close" onclick="closePopup()">×</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+            </div>
+        </div>
+        <div class="copyrights">
+          <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
+          <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
+          <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="{% static 'js/script1.js' %}" defer></script>
+</body>
+</html>
