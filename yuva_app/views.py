@@ -11,7 +11,7 @@ import razorpay
 import random
 import json
 
-# Ensure these match your models.py
+# Unified Imports: Use these names throughout the file
 from .models import User, ContactMessage, DonationTransaction, Article, Event
 from .forms import ContactForm, UserUpdateForm
 
@@ -209,19 +209,45 @@ def get_content(request):
     return JsonResponse({'articles': articles, 'events': events})
 
 def add_article(request):
-    if request.method == 'POST':
-        Article.objects.create(title=request.POST.get('title'), content=request.POST.get('content'), image=request.FILES.get('image'))
+    if request.method == "POST":
+        title = request.POST.get('title')
+        content = request.POST.get('content')
+        image = request.FILES.get('image')
+        
+        Article.objects.create(title=title, content=content, image=image)
         return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error'})
+    return JsonResponse({'status': 'failed'}, status=400)
 
 def add_event(request):
-    if request.method == 'POST':
-        Event.objects.create(title=request.POST.get('title'), description=request.POST.get('description'), date=request.POST.get('date'), image=request.FILES.get('image'))
+    if request.method == "POST":
+        title = request.POST.get('title')
+        date = request.POST.get('date')
+        description = request.POST.get('description')
+        image = request.FILES.get('image')
+        
+        Event.objects.create(title=title, date=date, description=description, image=image)
         return JsonResponse({'status': 'success'})
-    return JsonResponse({'status': 'error'})
-
+    return JsonResponse({'status': 'failed'}, status=400)
 def delete_content(request, type, id):
     if not request.user.is_staff: return JsonResponse({'status': 'error'})
     model = Article if type == 'article' else Event
     get_object_or_404(model, id=id).delete()
     return JsonResponse({'status': 'success'})
+
+@login_required
+@user_passes_test(is_admin)
+def admin_dashboard(request):
+    users = User.objects.filter(is_staff=False)
+    donations_query = DonationTransaction.objects.filter(status='Success')
+    total_donated = donations_query.aggregate(Sum('amount'))['amount__sum'] or 0
+    
+    # Passing the exact variable names your HTML template expects
+    context = {
+        'members': users,
+        'members_count': users.count(),
+        'events_count': Event.objects.count(),
+        'articles_count': Article.objects.count(),
+        'donations_total': total_donated,
+        'transactions': DonationTransaction.objects.all().order_by('-created_at')[:10],
+    }
+    return render(request, 'frontend/pages/admin-dashboard.html', context)
