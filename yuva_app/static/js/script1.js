@@ -700,7 +700,174 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
+
 // Define this if you haven't already
 window.openChangePasswordModal = () => {
     document.getElementById('passwordModal').style.display = 'block';
+};
+
+/* =========================================
+   ADMIN DASHBOARD: CONTENT & MODAL LOGIC
+   ========================================= */
+
+// --- MODAL TOGGLES ---
+/* =========================================
+   ADMIN DASHBOARD: ARTICLE & EVENT CONTROLS
+   ========================================= */
+
+// 1. MODAL OPEN/CLOSE
+window.getCSRF = () => {
+    const token = document.querySelector('[name=csrfmiddlewaretoken]') || document.querySelector('input[name="csrfmiddlewaretoken"]');
+    return token ? token.value : "";
+};
+
+// Open Modals
+window.getCSRF = () => {
+    return document.querySelector('[name=csrfmiddlewaretoken]')?.value;
+};
+
+// 2. Modal Controls
+window.openArticleForm = () => {
+    const modal = document.getElementById('articleModal');
+    if (modal) modal.style.display = 'flex';
+};
+
+window.closeModal = () => {
+    document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+};
+
+// 3. Publish Article Logic
+window.publishArticle = async () => {
+    const title = document.getElementById('articleTitle')?.value;
+    const content = document.getElementById('articleContent')?.value;
+    const imageInput = document.getElementById('articleImage');
+    const btn = document.getElementById('articleBtn');
+
+    if (!title || !content) {
+        showToast("Please enter a title and content", "error");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    if (imageInput?.files[0]) {
+        formData.append('image', imageInput.files[0]);
+    }
+
+    // UI Feedback
+    if (btn) {
+        btn.innerText = "Publishing...";
+        btn.disabled = true;
+    }
+
+    try {
+        const response = await fetch('/api/article/add/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': window.getCSRF() // Uses helper from step 1
+            },
+            body: formData
+        });
+
+        const data = await response.json();
+
+        if (data.status === 'success') {
+            showToast("Article Published Successfully!");
+            location.reload(); // Refresh to update counts
+        } else {
+            showToast("Error: " + (data.message || "Failed to save"), "error");
+        }
+    } catch (err) {
+        console.error(err);
+        showToast("Server Connection Failed", "error");
+    } finally {
+        if (btn) {
+            btn.innerText = "Publish";
+            btn.disabled = false;
+        }
+    }
+};
+
+// 3. ADD EVENT
+window.addEvent = async () => {
+    const title = document.getElementById('eventTitle').value;
+    const date = document.getElementById('eventDate').value;
+    const desc = document.getElementById('eventDesc').value;
+    const imageInput = document.getElementById('eventImage');
+
+    if (!title || !date) {
+        showToast("Name and Date are required!", "error");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('date', date);
+    formData.append('description', desc);
+    if (imageInput.files[0]) formData.append('image', imageInput.files[0]);
+
+    try {
+        const response = await fetch('/api/event/add/', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': getCSRF() },
+            body: formData
+        });
+        if (response.ok) {
+            showToast("Event Added Successfully!");
+            location.reload();
+        }
+    } catch (err) {
+        showToast("Connection Error", "error");
+    }
+};
+
+// --- FORM SUBMISSION FOR EVENTS ---
+window.addEvent = async () => {
+    const title = document.getElementById('eventTitle');
+    const date = document.getElementById('eventDate');
+    const desc = document.getElementById('eventDesc');
+    const image = document.getElementById('eventImage');
+
+    if (!title.value || !date.value) {
+        showToast("Name and Date are required", "error");
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('title', title.value);
+    formData.append('date', date.value);
+    formData.append('description', desc.value);
+    if (image.files[0]) formData.append('image', image.files[0]);
+
+    try {
+        const response = await fetch('/api/event/add/', {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: formData
+        });
+
+        if (response.ok) {
+            showToast("Event added successfully!");
+            location.reload();
+        }
+    } catch (error) {
+        showToast("Failed to connect to server", "error");
+    }
+};
+
+// --- DELETE LOGIC ---
+window.deleteContent = async (type, id) => {
+    if (!confirm(`Permanently delete this ${type}?`)) return;
+    
+    const res = await fetch(`/api/delete/${type}/${id}/`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': getCSRF() }
+    });
+    if (res.ok) {
+        showToast("Deleted successfully");
+        location.reload();
+    }
 };
