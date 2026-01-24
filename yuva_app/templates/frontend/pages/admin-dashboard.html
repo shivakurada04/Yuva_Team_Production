@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="YUVA Team profile page.">
+    <meta name="description" content="YUVA Team is dedicated to empowering youth and communities through education support, social awareness programs, and humanitarian initiatives in Telangana.">
     <link rel="icon" href="{% static 'assets/images/logo.png' %}">
-    <title>YUVA – Profile</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>YUVA – Admin</title>
+    <link rel="stylesheet" href="{% static 'css/admin-db.css' %}">
+    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
@@ -19,136 +20,198 @@
             <h1>YUV<span class="letterspan">A</span>TEAM</h1>
         </div>
         <div class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-controls="main-menu">☰</div>
-        <ul class="menu" id="nav-menu">
+        <ul class="menu">
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About Us</a></li>
             <li class="menuu"><span class="onhavour">What We Do</span>
-                <span><i class='bx bx-chevron-down down-arrow'></i></span> 
-                <ul class="dropdownmenu">
-                    <li><a href="{% url 'education' %}">School Education</a></li>
-                    <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
-                    <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
-                </ul>
+                    <span><i class='bx  bx-chevron-down down-arrow' ></i></span> 
+                    <ul class="dropdownmenu">
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul>
             </li>
            <li><a href="{% url 'events' %}">Our Events</a></li>
             <li><a href="{% url 'contact' %}">Contact Us</a></li>
-            <li><button class="supportbtn"><a href="{% url 'support' %}#onetime-form">Donate</a></button></li>
-            <li><a href="{% url 'logout' %}" class="login" style="background-color: #d9534f; color: white;">Logout</a></li>
+            <li><button class="supportbtn"><a href="{% url 'support' %}">Support Us</a></button></li>
+            <li><a href="{% url 'logout' %}" class="login" style="background-color: #d9534f; color: white; padding: 5px 15px; border-radius: 15px; text-decoration: none;">Logout</a></li>
         </ul>
      </nav>
     </header>    
-
     <main>
-        <section class="pofile-section">
-            <div class="events-container">
-                <h1 class="page-title">My Profile</h1>
+      <section class="dashboardhead">
 
-                <div class="profile-wrapper">
-                    <aside class="sidebar">
-                        <ul>
-                            <li class="active" data-target="personal-details"><span>Personal Details</span></li>
-                            <li data-target="my-impact"><span>My Impact</span></li>
-                        </ul>
-                    </aside>
+        <div class="dashboard-title">
+          <h2>YUVA Admin Dashboard</h2>
+        </div>
 
-                    <div class="profile-content-area">
-                        <div class="profile-card">
-                            <div class="profile-img-wrapper">
-                                <img id="displayProfileImg"
-                                     src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'assets/images/logo.png' %}{% endif %}"
-                                     alt="Profile Image"
-                                     onclick="document.getElementById('profileUpload').click()">
+    <div class="wrapper">
+      <aside class="sidebar">
+    <ul>
+      <li class="active" data-target="dashboard">Dashboard</li>
+      <li data-target="articles">Articles</li>
+      <li data-target="events">Events</li>
+      <li data-target="users">Users</li>
+      <li data-target="transactions">Transactions</li>
+    </ul>
+  </aside>
+
+  <main class="content">
+
+    <section id="dashboard" class="section show">
+      <h3>Overview</h3>
+      <div class="dashbrdCards">
+        <div class="viewcard">Members <span id="usersCount">0</span></div>
+        <div class="viewcard">Events <span id="eventsCount">0</span></div>
+        <div class="viewcard">Articles <span id="eventsCount">0</span></div>
+        <div class="viewcard">Donations ₹<span id="donationsTotal">0</span></div>
+      </div>
+    </section>
+
+    <section id="articles" class="section">
+      <div class="section-header">
+        <h3>Articles</h3>
+        <button onclick="openArticleForm()" class="btn-gold">+ Publish Article</button>
+      </div>
+
+      <div id="articlesList" class="list"></div>
+    </section>
+
+    <section id="events" class="section">
+      <div class="section-header">
+        <h3>Events</h3>
+        <button onclick="openEventForm()" class="btn-gold">+ Add Event</button>
+      </div>
+
+      <div id="eventsList" class="list"></div>
+    </section>
+
+    <section id="users" class="section">
+      <div class="section-header">
+      <h3>Users</h3>
+      <button onclick="openUserForm()" class="btn-gold">+ Add Member</button>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Name</th><th>Email</th><th>Action</th></tr>
+        </thead>
+        <tbody id="usersTable"></tbody>
+      </table>
+    </section>
+
+    <section id="transactions" class="section">
+      <h3>Transactions</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Status</th></tr>
+        </thead>
+        <tbody id="transactionsTable"></tbody>
+      </table>
+    </section>
+
+  </main>
+</div>
+
+<div class="modal" id="articleModal">
+  <div class="modal-content">
+    <h3>Publish Article</h3>
+    <input type="text" id="articleTitle" placeholder="Title" />
+    
+    <label for="articleImage" style="display:block; margin-top:10px; font-weight:bold;">Article Image:</label>
+    <input type="file" id="articleImage" accept="image/*" style="width: 100%; margin-bottom: 15px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+    
+    <textarea id="articleContent" placeholder="Content"></textarea>
+    <div class="modal-actions">
+      <button class="cancel"onclick="publishArticle()" id="articleBtn">Publish</button>
+      <button class="cancel" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="eventModal">
+  <div class="modal-content">
+    <h3>Add Event</h3>
+    <input type="text" id="eventTitle" placeholder="Event Name" />
+    <input type="date" id="eventDate" />
+    
+    <label for="eventImage" style="display:block; margin-top:10px; font-weight:bold;">Event Image:</label>
+    <input type="file" id="eventImage" accept="image/*" style="width: 100%; margin-bottom: 15px; padding: 5px; border: 1px solid #ccc; border-radius: 5px;">
+    
+    <textarea id="eventDesc" placeholder="Description"></textarea>
+    <div class="modal-actions">
+      <button class="cancel" onclick="addEvent()" id="eventBtn">Add</button>
+      <button class="cancel" onclick="closeModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+</section>
+</main>
+<footer>
+        <div class="footerdetails">
+            <div class="footerlogoname">
+                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
+                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
+                <div class="footersocialmedia">
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
+                    <div id="callPopup" class="popup">
+                        <div class="popup-content">
+                            <h3>Contact Us</h3>
+                            <p id="phoneNumber">+91 9010455221</p>
+
+                            <div class="popup-actions">
+                                <a href="tel:+919010455221" class="btn call">Call</a>
+                                <button class="btn copy" onclick="copyNumber()">Copy</button>
                             </div>
-                            <input type="file" id="profileUpload" accept="image/*" hidden onchange="updateProfileImage(this)">
-                            
-                            <h3 id="profile-name" class="profile-name">{{ user.first_name }} {{ user.last_name }}</h3>
-                            <p class="member-since">Member since {{ user.date_joined|date:"Y" }}</p>
-                            <hr class="divider">
-                            <button class="btn btn-dark" onclick="openChangePasswordModal()">
-                                <i class='bx bxs-lock-alt'></i> Change Password
-                            </button>
-                            <a href="{% url 'logout' %}" class="btn btn-danger logout-btn" style="text-decoration:none;">Logout</a>
-                        </div>
 
-                        <div class="profile-main-content">
-                            <section id="personal-details" class="section show">
-                                <h3 class="section-heading">Personal Details</h3>
-                                <form method="POST" action="{% url 'user_profile' %}">
-                                    {% csrf_token %}
-                                    <div class="details-grid">
-                                        <div><label>First Name</label><input type="text" name="first_name" value="{{ user.first_name }}"></div>
-                                        <div><label>Last Name</label><input type="text" name="last_name" value="{{ user.last_name }}"></div>
-                                        <div><label>Email Address</label><input type="text" value="{{ user.email }}" readonly style="background-color: #f0f0f0;"></div>
-                                        <div><label>Phone Number</label><input type="text" name="phone_number" value="{{ user.phone_number }}"></div>
-                                        <div><label>Address / City</label><input type="text" name="address" value="{{ user.address|default:'' }}" placeholder="Hyderabad"></div>
-                                        <div><label>Account Status</label><input type="text" value="{% if user.is_active %}Active{% else %}Inactive{% endif %}" readonly style="background-color: #f0f0f0;"></div>
-                                    </div>
-                                    <div class="save-wrapper">
-                                        <button type="submit" class="btn btn-gold">Save Changes</button>
-                                    </div>
-                                </form>
-                            </section>
-
-                            <section id="my-impact" class="section">
-                                <h3 class="section-heading">My Impact</h3>
-                                <div class="dashbrdCards">
-                                    <div class="viewcard">
-                                        <p>Total Donated</p>
-                                        <span id="donationsTotal">₹ {{ total_donated|default:"0" }}</span>
-                                    </div>
-                                    <div class="viewcard">
-                                        <p>Events Attended</p>
-                                        <span id="eventsCount">0</span>
-                                    </div>
-                                </div>
-                                <div class="transaction-container">
-                                    <h4 class="sub-heading">Donation History</h4>
-                                    <div class="table-responsive">
-                                        <table class="transaction-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>Transaction ID</th>
-                                                    <th>Cause</th>
-                                                    <th>Amount</th>
-                                                    <th>Status</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="donationHistoryBody">
-                                                <tr>
-                                                    <td colspan="5" style="text-align:center;">No recent transactions.</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </section>
+                            <span class="close" onclick="closePopup()">×</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <div id="passwordModal" class="membermodal">
-        <div class="modal-box">
-            <h3 class="modal-title">Change Password</h3>
-            <input type="password" id="newPass" placeholder="New Password">
-            <input type="password" id="confirmPass" placeholder="Confirm New Password">
-            <div class="membermodal-actions">
-                <button class="btn btn-danger" onclick="saveNewPassword()">Update</button>
-                <button class="btn btn-dark" onclick="document.getElementById('passwordModal').style.display='none'">Cancel</button>
+            <div class="footconmenu">
+                <ul class="footmenu">
+                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
+                    <ul>
+                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
+                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
+                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
+                    </ul></li>
+                    <li><span>WHAT WE DO</span><ul>
+                        <li><a href="{% url 'education' %}">School Education</a></li>
+                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
+                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
+                    </ul></li>
+                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
+                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
+                    </ul></li>
+                    <li><span>GET IN TOUCH</span>
+                        <ul>
+                        <li><a href="{% url 'support' %}">Support Us</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
             </div>
         </div>
-    </div>
-
-    <footer>
         <div class="copyrights">
           <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
           <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
           <p>&copy; 2009 Yuva Team - Bhongir <span>|</span> All rights reserved.</p>
         </div>
     </footer>
-    <script src="{% static 'js/script1.js' %}" defer></script>
+<script src="{% static 'js/script1.js' %}" defer></script>
 </body>
 </html>
