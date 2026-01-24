@@ -3,6 +3,7 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 from yuva_app import views 
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     # --- Django Default Admin ---
@@ -37,7 +38,7 @@ urlpatterns = [
     path('api/send-otp/', views.send_otp, name='send_otp'),
     path('api/verify-otp/', views.verify_otp, name='verify_otp'),
     path('api/create-account/', views.create_account, name='create_account'),
-    
+    path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
     # --- Payments (Razorpay) ---
     path('donate/pay/', views.initiate_payment, name='initiate_payment'),
     path('donate/success/', views.payment_success, name='payment_success'),
