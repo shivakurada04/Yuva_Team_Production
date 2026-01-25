@@ -277,6 +277,34 @@ def admin_dashboard(request):
     }
     return render(request, 'frontend/pages/admin-dashboard.html', context)
 #forgot password
+
+def send_reset_otp(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        if not email: 
+            return JsonResponse({'status': 'error', 'message': 'Email required'})
+        
+        # Security: Only send if the user exists
+        if not User.objects.filter(email__iexact=email).exists():
+            return JsonResponse({'status': 'error', 'message': 'No account found with this email.'})
+        
+        otp = random.randint(1000, 9999)
+        request.session['otp'] = str(otp)
+        request.session['reset_email'] = email  # Key for Step 3
+        
+        try:
+            send_mail(
+                'YUVA Password Reset', 
+                f'Your password reset code is: {otp}', 
+                settings.EMAIL_HOST_USER, 
+                [email], 
+                fail_silently=False
+            )
+            return JsonResponse({'status': 'success', 'message': 'Reset OTP sent successfully'})
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': 'Mail Error: ' + str(e)})
+    return JsonResponse({'status': 'error', 'message': 'Invalid Method'})
+
 def verify_reset_otp(request):
     if request.method == 'POST':
         entered_otp = request.POST.get('otp')
@@ -291,60 +319,37 @@ def verify_reset_otp(request):
     return JsonResponse({'status': 'error', 'message': 'Invalid Method'})
 
 def finalize_password_reset(request):
+    # This will now find the email because we updated send_otp above
+    email = request.session.get('reset_email')
+    print(f"DEBUG: Session Email is {email}") 
+
     if request.method == 'POST':
-        # Security Check: Ensure they actually verified the OTP first
         if not request.session.get('reset_verified'):
             return JsonResponse({'status': 'error', 'message': 'Session expired or not verified.'})
 
-        email = request.session.get('reset_email')
         new_password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
 
         if not new_password or new_password != confirm_password:
             return JsonResponse({'status': 'error', 'message': 'Passwords do not match.'})
 
+        if not email:
+            return JsonResponse({'status': 'error', 'message': 'User email not found in session.'})
+
         try:
-            user = User.objects.get(email=email)
-            user.set_password(new_password) # Use set_password to handle hashing
+            # Use iexact to avoid case-sensitivity issues (e.g., User@Gmail.com)
+            user = User.objects.get(email__iexact=email)
+            user.set_password(new_password)
             user.save()
             
-            # Clean up session
-            del request.session['otp']
-            del request.session['reset_email']
-            del request.session['reset_verified']
+            # Clean up session safely
+            request.session.pop('otp', None)
+            request.session.pop('reset_email', None)
+            request.session.pop('reset_verified', None)
+            request.session.pop('reg_email', None)
             
             return JsonResponse({'status': 'success', 'message': 'Password reset successful! Please login.'})
         except User.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': 'User not found.'})
+            return JsonResponse({'status': 'error', 'message': 'User not found in database.'})
             
     return JsonResponse({'status': 'error', 'message': 'Invalid Method'})
-
-def finalize_reset(request):
-    if request.method == 'POST':
-        # Security: Check if they actually passed the OTP verification
-        if not request.session.get('reset_verified'):
-            return JsonResponse({'status': 'error', 'message': 'Session expired. Please verify OTP again.'})
-
-        # Get data from the fetch request
-        email = request.session.get('reset_email')
-        password = request.POST.get('password')
-        confirm = request.POST.get('confirm_password')
-
-        if not password or password != confirm:
-            return JsonResponse({'status': 'error', 'message': 'Passwords do not match or are empty.'})
-
-        try:
-            user = User.objects.get(email=email)
-            # IMPORTANT: use set_password to hash the password
-            user.set_password(password)
-            user.save()
-            
-            # Clear the reset session data so it can't be used again
-            request.session['reset_verified'] = False
-            request.session['reset_email'] = None
-            
-            return JsonResponse({'status': 'success', 'message': 'Password reset successful! Redirecting to login...'})
-        except User.DoesNotExist:
-            return JsonResponse({'status': 'error', 'message': 'User not found.'})
-
-    return JsonResponse({'status': 'error', 'message': 'Invalid Method'}, status=400)
