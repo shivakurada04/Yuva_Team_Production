@@ -898,7 +898,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             formData.append('csrfmiddlewaretoken', csrfToken);
 
-            fetch('/api/send-otp/', {
+            fetch('/api/send-reset-otp/', {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -962,6 +962,41 @@ if (verifyBtn) {
         .catch(err => {
             console.error("Verification Error:", err);
             showToast("Server error during verification", "error");
+        });
+    });
+}
+const finalizeBtn = document.getElementById('finalize-reset-btn');
+
+if (finalizeBtn) {
+    finalizeBtn.addEventListener('click', function() {
+        // 1. Grab values from the Step 3 inputs
+        const pass = document.getElementById('new-password').value;
+        const confirm = document.getElementById('confirm-new-password').value;
+        const token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        if (pass !== confirm) {
+            showToast("Passwords do not match", "error");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('password', pass);
+        formData.append('confirm_password', confirm);
+
+        // 2. The Fetch call MUST match your urls.py
+        fetch('/api/finalize-reset/', { 
+            method: 'POST', 
+            body: formData,
+            headers: { 'X-CSRFToken': token }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                showToast("Success! Redirecting...");
+                setTimeout(() => window.location.href = "/login/", 2000);
+            } else {
+                showToast(data.message, "error");
+            }
         });
     });
 }
