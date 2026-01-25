@@ -47,8 +47,9 @@ urlpatterns = [
     path('api/delete/<str:type>/<int:id>/', views.delete_content, name='delete_content'),
     path('api/change-password/', views.change_password, name='change_password'),
     path('forgot-password/', views.forgot_password_view, name='forgetPassword'),
+    path('api/send-reset-otp/', views.send_reset_otp, name='send_reset_otp'),
     path('api/verify-reset-otp/', views.verify_reset_otp, name='verify_reset_otp'),
-    path('api/finalize-reset/', views.finalize_reset, name='finalize_reset'),
+    path('api/finalize-reset/', views.finalize_password_reset, name='finalize_reset'),
 
 ]
 
