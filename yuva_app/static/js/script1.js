@@ -871,3 +871,99 @@ window.deleteContent = async (type, id) => {
         location.reload();
     }
 };
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const sendBtn = document.getElementById('forgot-send-otp-btn');
+
+    if (sendBtn) {
+        sendBtn.addEventListener('click', function (e) {
+            e.preventDefault(); // Prevent any default behavior
+            
+            const emailInput = document.getElementById('forgot-email');
+            const email = emailInput.value;
+            
+            if (!email) {
+                showToast("Please enter your email", "error");
+                return;
+            }
+
+            sendBtn.innerText = "Sending...";
+            sendBtn.disabled = true;
+
+            const formData = new FormData();
+            formData.append('email', email);
+            
+            // Explicitly grab the token from the hidden input Django generated
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            formData.append('csrfmiddlewaretoken', csrfToken);
+
+            fetch('/api/send-otp/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': csrfToken // Adding it to headers is safer for Django
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showToast("OTP sent successfully!");
+                    document.getElementById('forgot-step-1').style.display = 'none';
+                    document.getElementById('forgot-step-2').style.display = 'block';
+                } else {
+                    showToast(data.message, "error");
+                    sendBtn.innerText = "Send OTP";
+                    sendBtn.disabled = false;
+                }
+            })
+            .catch(err => {
+                console.error("Error:", err);
+                showToast("Server error. Check your connection.", "error");
+                sendBtn.innerText = "Send OTP";
+                sendBtn.disabled = false;
+            });
+        });
+    }
+});
+
+const verifyBtn = document.getElementById('forgot-verify-btn');
+
+if (verifyBtn) {
+    verifyBtn.addEventListener('click', function() {
+        const otp = document.getElementById('forgot-otp-code').value;
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        if (!otp) {
+            showToast("Please enter the OTP", "error");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('otp', otp);
+
+        fetch('/api/verify-reset-otp/', { 
+            method: 'POST', 
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.status === 'success') {
+                showToast("OTP Verified!");
+                document.getElementById('forgot-step-2').style.display = 'none';
+                document.getElementById('forgot-step-3').style.display = 'block';
+            } else {
+                showToast(data.message, "error");
+            }
+        })
+        .catch(err => {
+            console.error("Verification Error:", err);
+            showToast("Server error during verification", "error");
+        });
+    });
+}
+
+
