@@ -29,6 +29,9 @@ def events(request): return render(request, 'frontend/pages/events.html')
 def support_mission(request): return render(request, 'frontend/pages/Supportourmission.html')
 def disclaimer(request): return render(request, 'frontend/pages/disclaimer.html')
 def privacy_policy(request): return render(request, 'frontend/pages/privacypolicy.html')
+# yuva_app/views.py
+def forgot_password_view(request):
+    return render(request, 'frontend/pages/forgetPassword.html')
 
 # --- 2. Contact Us (Cleaned) ---
 def contact_view(request):
@@ -133,16 +136,38 @@ def user_profile(request):
     total_donated = user_donations['amount__sum'] or 0
 
     if request.method == 'POST':
-        # This handles profile updates (Name, Address, Profile Pic)
+        # You MUST include request.FILES to capture the profile picture upload
         form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
             return redirect('user_profile')
-    
-    return render(request, 'frontend/pages/membership-profile.html', {
-        'user': request.user, 'total_donated': total_donated
-    })
+    else:
+        form = UserUpdateForm(instance=request.user)
 
+    return render(request, 'frontend/pages/membership-profile.html', {
+        'user': request.user, 
+        'total_donated': total_donated,
+        'form': form # VITAL: Pass the form back to the template
+    })    # Fetch donation sum for the impact section
+    user_donations = DonationTransaction.objects.filter(email=request.user.email, status='Success').aggregate(Sum('amount'))
+    total_donated = user_donations['amount__sum'] or 0
+
+    if request.method == 'POST':
+        # VITAL: You must include request.FILES to handle the profile picture upload
+        form = UserUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('user_profile')
+    else:
+        # Pre-fill the form with existing user data for GET requests
+        form = UserUpdateForm(instance=request.user)
+
+    # Fallback return: This ensures an HttpResponse is ALWAYS returned
+    return render(request, 'frontend/pages/membership-profile.html', {
+        'user': request.user, 
+        'total_donated': total_donated,
+        'form': form
+    })
 @login_required
 def change_password(request):
     if request.method == 'POST':
@@ -251,3 +276,75 @@ def admin_dashboard(request):
         'transactions': DonationTransaction.objects.all().order_by('-created_at')[:10],
     }
     return render(request, 'frontend/pages/admin-dashboard.html', context)
+#forgot password
+def verify_reset_otp(request):
+    if request.method == 'POST':
+        entered_otp = request.POST.get('otp')
+        saved_otp = request.session.get('otp')
+        
+        if entered_otp and str(entered_otp) == str(saved_otp):
+            # Mark the session as 'reset_verified' so the user can change password
+            request.session['reset_verified'] = True
+            return JsonResponse({'status': 'success', 'message': 'OTP Verified. Proceed to reset password.'})
+            
+        return JsonResponse({'status': 'error', 'message': 'Invalid OTP'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid Method'})
+
+def finalize_password_reset(request):
+    if request.method == 'POST':
+        # Security Check: Ensure they actually verified the OTP first
+        if not request.session.get('reset_verified'):
+            return JsonResponse({'status': 'error', 'message': 'Session expired or not verified.'})
+
+        email = request.session.get('reset_email')
+        new_password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
+
+        if not new_password or new_password != confirm_password:
+            return JsonResponse({'status': 'error', 'message': 'Passwords do not match.'})
+
+        try:
+            user = User.objects.get(email=email)
+            user.set_password(new_password) # Use set_password to handle hashing
+            user.save()
+            
+            # Clean up session
+            del request.session['otp']
+            del request.session['reset_email']
+            del request.session['reset_verified']
+            
+            return JsonResponse({'status': 'success', 'message': 'Password reset successful! Please login.'})
+        except User.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found.'})
+            
+    return JsonResponse({'status': 'error', 'message': 'Invalid Method'})
+
+def finalize_reset(request):
+    if request.method == 'POST':
+        # Security: Check if they actually passed the OTP verification
+        if not request.session.get('reset_verified'):
+            return JsonResponse({'status': 'error', 'message': 'Session expired. Please verify OTP again.'})
+
+        # Get data from the fetch request
+        email = request.session.get('reset_email')
+        password = request.POST.get('password')
+        confirm = request.POST.get('confirm_password')
+
+        if not password or password != confirm:
+            return JsonResponse({'status': 'error', 'message': 'Passwords do not match or are empty.'})
+
+        try:
+            user = User.objects.get(email=email)
+            # IMPORTANT: use set_password to hash the password
+            user.set_password(password)
+            user.save()
+            
+            # Clear the reset session data so it can't be used again
+            request.session['reset_verified'] = False
+            request.session['reset_email'] = None
+            
+            return JsonResponse({'status': 'success', 'message': 'Password reset successful! Redirecting to login...'})
+        except User.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'User not found.'})
+
+    return JsonResponse({'status': 'error', 'message': 'Invalid Method'}, status=400)
