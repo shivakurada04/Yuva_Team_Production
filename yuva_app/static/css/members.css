@@ -19,7 +19,7 @@
   body.no-scroll {
     overflow: hidden;
   }
-  form{
+  .form-mem{
     display: flex;
     gap: 24px;
   }
@@ -723,3 +723,4 @@ footer {
     color: #e60000 !important;
     font-weight: 700;
   }
+
