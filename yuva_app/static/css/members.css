@@ -19,7 +19,7 @@
   body.no-scroll {
     overflow: hidden;
   }
-  .form-mem{
+ .form-mem{
     display: flex;
     gap: 24px;
   }
@@ -160,7 +160,10 @@
   main {
     padding-top: 5em;
   }
-  
+  .profile-content-area .form-mem{
+    display: flex;
+    gap: 24px;
+  }
 /* Layout Alignment */
 .pofile-section {
     width: 100%;
@@ -723,4 +726,3 @@ footer {
     color: #e60000 !important;
     font-weight: 700;
   }
-
