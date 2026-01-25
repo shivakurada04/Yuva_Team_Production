@@ -19,6 +19,10 @@
   body.no-scroll {
     overflow: hidden;
   }
+  form{
+    display: flex;
+    gap: 24px;
+  }
   nav {
     display: flex;
     justify-content: space-between;
@@ -165,9 +169,17 @@
     align-items: center;
     padding: 20px;
     margin: 0 auto;
-    background-color: rgba(1,1,1,0.5);
+    gap: 200px;
+    background-color: rgba(1, 1, 1, 0.471);
 }
-
+.page-title{
+  color: #ffcc00;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 4px;
+}
 .profile-wrapper {
     display: flex;
     flex-direction: column;
@@ -236,13 +248,14 @@
     box-shadow: -5px 5px 0 5px #ffffff;
 }
 
+
 /* White Content Area */
 .profile-content-area {
     background: #ffffff;
+    display: grid;
     padding: 40px;
-    display: flex;
     gap: 30px;
-    min-height: 100vh;
+    min-height: 60vh;
     width: 1400px;
 }
 
