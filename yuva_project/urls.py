@@ -37,6 +37,7 @@ urlpatterns = [
     path('api/verify-otp/', views.verify_otp, name='verify_otp'),
     path('api/create-account/', views.create_account, name='create_account'),
     path('logout/', auth_views.LogoutView.as_view(next_page='index'), name='logout'),
+    path('logout/', views.logout_view, name='logout'),
     # --- Payments (Razorpay) ---
     path('donate/pay/', views.initiate_payment, name='initiate_payment'),
     path('donate/success/', views.payment_success, name='payment_success'),
