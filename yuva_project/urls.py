@@ -24,9 +24,7 @@ urlpatterns = [
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
 
     # --- Authentication (Login/Logout) ---
-    path('login/', views.login_view, name='login'),
-    path('logout/', views.logout_view, name='logout'),
-    
+    path('login/', views.login_view, name='login'),    
     # --- Member Profile ---
     path('profile/', views.user_profile, name='user_profile'),
     
@@ -48,6 +46,9 @@ urlpatterns = [
     path('api/event/add/', views.add_event, name='add_event'),
     path('api/delete/<str:type>/<int:id>/', views.delete_content, name='delete_content'),
     path('api/change-password/', views.change_password, name='change_password'),
+    path('forgot-password/', views.forgot_password_view, name='forgetPassword'),
+    path('api/verify-reset-otp/', views.verify_reset_otp, name='verify_reset_otp'),
+    path('api/finalize-reset/', views.finalize_reset, name='finalize_reset'),
 
 ]
 
