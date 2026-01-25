@@ -47,7 +47,7 @@
         <section class="pofile-section">
             <div class="events-container">
                 <h1 class="page-title">My Profile</h1>
-
+                
                 <div class="profile-wrapper">
                     <aside class="sidebar">
                         <ul>
@@ -57,27 +57,30 @@
                     </aside>
 
                     <div class="profile-content-area">
-                        <div class="profile-card">
-                            <div class="profile-img-wrapper">
-                                <img id="displayProfileImg"
-                                     src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'assets/images/logo.png' %}{% endif %}"
-                                     alt="Profile Image"
-                                     onclick="document.getElementById('profileUpload').click()"
-                                     title="Click to change photo">
-                            </div>
-                            <form id="profilePicForm" method="POST" enctype="multipart/form-data" action="{% url 'user_profile' %}">
-                                {% csrf_token %}
-                                <input type="file" id="profileUpload" name="profile_picture" accept="image/*" hidden onchange="this.form.submit()">
-                            </form>
-                            
-                            <h3 id="profile-name" class="profile-name">{{ user.first_name }} {{ user.last_name }}</h3>
-                            <p class="member-since">Member since {{ user.date_joined|date:"Y" }}</p>
-                            <hr class="divider">
-                            <button class="btn btn-dark" onclick="openChangePasswordModal()">
-                                <i class='bx bxs-lock-alt'></i> Change Password
-                            </button>
-                            <a href="{% url 'logout' %}" class="btn btn-danger logout-btn" style="text-decoration:none;">Logout</a>
-                        </div>
+                        <form method="POST" action="{% url 'user_profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <div class="profile-card">
+            <div class="profile-img-wrapper">
+                <img id="displayProfileImg"
+                     src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'assets/images/logo.png' %}{% endif %}"
+                     alt="Profile Image"
+                     onclick="document.getElementById('profileUpload').click()"
+                     title="Click to change photo"
+                     onerror="this.onerror=null;this.src='{% static 'assets/images/logo.png' %}';">
+            </div>
+            
+            <input type="file" id="profileUpload" name="profile_picture" accept="image/*" hidden onchange="console.log('File selected')">
+            
+            <h3 id="profile-name" class="profile-name">{{ user.first_name }} {{ user.last_name }}</h3>
+            <p class="member-since">Member since {{ user.date_joined|date:"Y" }}</p>
+            <hr class="divider">
+            <button type="button" class="btn btn-dark" onclick="openChangePasswordModal()">
+                <i class='bx bxs-lock-alt'></i> Change Password
+            </button>
+            <a href="{% url 'logout' %}" class="btn btn-danger logout-btn" style="text-decoration:none;">Logout</a>
+        </div>
+
 
                         <div class="profile-main-content">
                             <section id="personal-details" class="section show">
