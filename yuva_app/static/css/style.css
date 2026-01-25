@@ -1183,6 +1183,9 @@
     cursor: pointer;
     margin-top: 1em;
   }
+  .backtn a{
+    color:  wheat;
+  }
   #loginbtn:hover,
   .frgtform button:hover {
     background: #b80202;
@@ -3828,4 +3831,49 @@ button:hover {
     padding: 2em 0;
     font-size: 1.05em;
     font-weight: 700;
+}
+/* Container Fixes */
+.forgot-password {
+    min-height: 100vh;
+    display: flex;
+    align-items: center; /* Vertically center */
+    justify-content: center; /* Horizontally center */
+    background-color: #e60000; /* Matching your brand red */
+    padding: 20px;
+}
+
+/* Form Styling */
+.auth-form-container h2 {
+    font-family: var(--font-heading);
+    color: #e60000;
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.frgtform-step {
+    width: 100%;
+}
+
+.forgot-password a.backtohome {
+    position: static; /* Remove the absolute positioning */
+    color: #ffffff; 
+    font-weight: 700;
+    text-decoration: underline;
+    display: inline-block;
+}
+
+.auth-form-container .formsubmit {
+    width: 100%;
+    margin: 1.5rem 0 0;
+    display: block;
+    font-family: var(--font-heading);
+}
+
+/* Instruction Text */
+.auth-instructions {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
