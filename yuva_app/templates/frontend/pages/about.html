@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-     <nav aria-label="Main navigation"> 
+     <nav aria-label="Main navigation" class="nav"> 
         <div class="logoname">
             <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
             <h1>YUV<span class="letterspan">A</span>TEAM</h1>
@@ -51,10 +51,10 @@
     
     <main>
         <section>
-            <div class="manualslides">
+            <div class="manualslides image-slide">
                 <div class="mySlides">
                         <h1>About Us</h1>
-                        <img src="{% static 'assets/images/aboutimg5.webp' %}">
+                        <img class="slides" src="{% static 'assets/images/aboutimg5.webp' %}">
                 </div>
             </div>
         </section>
@@ -154,7 +154,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer class="footer">
         <div class="footerdetails">
             <div class="footerlogoname">
                 <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
