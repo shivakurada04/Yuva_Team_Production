@@ -14,7 +14,7 @@
 </head>
 <body>
     <header>
-     <nav aria-label="Main navigation"> 
+     <nav aria-label="Main navigation" class="nav"> 
         <div class="logoname">
             <img src="{% static 'assets/images/logo.png' %}" class="logo" alt="logo of yuva organization">
             <h1>YUV<span class="letterspan">A</span>TEAM</h1>
@@ -57,7 +57,7 @@
                     </aside>
 
                     <div class="profile-content-area">
-                        <form method="POST" action="{% url 'user_profile' %}" enctype="multipart/form-data" class="form-mem">
+                        <form method="POST" action="{% url 'user_profile' %}" enctype="multipart/form-data" class="form-mem" >
         {% csrf_token %}
         
         <div class="profile-card">
@@ -177,7 +177,7 @@
     </div>
     
 
-    <footer>
+    <footer class="footer">
         <div class="copyrights">
           <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
           <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>
