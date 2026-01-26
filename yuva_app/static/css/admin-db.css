@@ -19,7 +19,8 @@
   body.no-scroll {
     overflow: hidden;
   }
-  nav {
+ 
+  .nav {
     display: flex;
     justify-content: space-between;
     position: fixed;
@@ -128,6 +129,7 @@
     padding: .5em .2em;
     border-radius: 1em;
     margin: 0 .8em;
+    color: #fff;
   }
   .supportbtn a {
     color: #fff;
@@ -673,4 +675,310 @@ footer {
   .copyrights a.active {
     color: #e60000 !important;
     font-weight: 700;
+  }
+  
+@media (max-width: 1174px) {
+    .nav {
+      padding: .5em;
+    }
+    .menu a {
+      font-size: .9rem;
+      padding: .25em;
+      margin: .25em;
+    }
+    .menuu {
+      font-size: .9rem;
+      padding: .25em .5em;
+      margin: .25em 1em .25em 0;
+    }
+    .nav .menu a.active {
+      font-size: 1rem;
+      font-weight: 800;
+    }
+    .down-arrow {
+      font-size: 1.2rem;
+      font-weight: 700;
+      top: 4px;
+      transition: transform 0.3s ease;
+    }
+  }
+  @media (max-width: 992px) {
+    .nav {
+      padding: .5em;
+    }
+    .menu a {
+      font-size: .8rem;
+      padding: .25em;
+      margin: .25em;
+    }
+    .menuu {
+      font-size: .8rem;
+      padding: .25em .5em;
+      margin: .25em 1em .25em 0;
+    }
+    .nav .menu a.active {
+      font-size: .9rem;
+      font-weight: 900;
+    }
+    .down-arrow {
+      font-size: 1.2rem;
+      font-weight: 700;
+      top: 4px;
+      transition: transform 0.3s ease;
+    }
+    .logo {
+      width: 135px;
+    }
+    h1 {
+      padding: .5em 0 0 .2em;
+      font-size: 1.7rem;
+    }
+    .letterspan {
+      margin-left: -12px;
+    }
+    .dropdownmenu {
+      top: 55px;
+    }
+    .aboutoverview{
+      padding: 4px;
+    }
+    .aboutoverview h2, .aboutstory h2, .aboutteam h2, .aboutimpact h2, .aboutjoin h2{
+      padding: 12px;
+    }
+    .aboutoverview .over{
+      padding: 20px;
+    }
+    .footermenu li {
+      padding: .5em;
+    }
+    .footermenu a {
+      font-size: .95rem;
+    }
+    .donation-goal {
+      padding: 5em 1.5em;
+    }
+    .donation-goal h2 {
+      font-size: 2.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+    .nav{
+      padding: 0 16px;
+    }
+    .aboutvision{
+    flex-direction: column;
+  }
+  .aboutvismission h3, .aboutfounder h2{
+    padding: 12px 24px;
+  }
+  .aboutvision p{
+    padding: 4px 22px;
+  }
+    h1 {
+      padding-top: .8em;
+      font-size: 1.4rem;
+    }
+    .letterspan {
+      margin-left: -8px;
+    }
+    .menu {
+      display: none;
+      position: absolute;
+      top: 53px;
+      right: 0;
+      background-color: #fff;
+      width: 38%;
+      flex-direction: column;
+      align-items: start;
+    }
+    .menu li {
+      padding: 8px;
+    }
+    .menuu {
+      margin: 0 0 0 1em;
+    }
+    .dropdownmenu {
+      min-width: 145px;
+      top: 40px;
+      padding: .2em;
+      border: 1px solid #EBEBEC;
+    }
+    .edudes{
+    padding: 3rem 8px;
+  }
+  .social-intro {
+    padding: 1em 0.1em;
+  }
+  .program-section .image-area{
+    min-height: 0;
+  }
+    .dropdownmenu a {
+      padding: 0;
+    }
+    .menu-toggle {
+      display: block;
+      padding: 0.3em;
+      margin-top: .3em;
+      font-size: 1.5rem;
+    }
+    .menu{
+      gap: 6px;
+    }
+    .menu.active {
+      display: flex;
+      right: 16px;
+    }
+    main {
+      padding-top: 3.2em;
+    }
+    .form-grid {
+      display: flex;
+      flex-direction: column;
+    }
+    .slide .hero-content {
+      left: 1em;
+      right: 1em;
+      max-width: 90%;
+      text-align: center;
+    }
+    .slide .hero-content h1 {
+      font-size: 2.2rem;
+    }
+    .home-about h2,
+    .home-what-we-do h2,
+    .home-impact h2,
+    .home-cta h2 {
+      font-size: 2rem;
+    }
+    .home-about p,
+    .home-cta p {
+      font-size: 0.9rem;
+    }
+    .home-about,
+    .home-what-we-do,
+    .home-impact,
+    .home-cta {
+      padding: 2em 1em;
+    }
+    .stickyline {
+      display: none;
+    }
+    .quote {
+      width: 90%;
+      font-size: 1.8rem;
+      bottom: 10%;
+    }
+    .support-intro {
+      padding: 2em;
+    }
+    .donation-goal h2 {
+      margin: 0;
+    }
+    .sidebar ul{
+      display: grid;
+    }
+    .sidebar li.active::before, .sidebar li.active::after{
+      display: none;
+    }
+    .sidebar li{
+      border-radius: 0;
+    }
+    .memberform form,
+    .donationform form {
+      width: 100%;
+      margin: 1.5em 0;
+      padding: 1.5em 0.8em;
+    }
+    .contact-form form {
+      padding: 1.5em 0.8em;
+    }
+    .question {
+      font-size: 2rem;
+    }
+    .footer {
+      padding: 1.5em 1.5em 0;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .video-container video{
+      min-height: 200px;
+      object-fit: fill;
+    }
+    .footerdetails {
+      padding-bottom: 1em;
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .footerlogo {
+      width: 120px;
+      padding: 0;
+      margin: 0 auto;
+    }
+    .footerlogoname h1 {
+      padding: 0;
+      margin: 0;
+    }
+    .footletterspan {
+      margin: -14px;
+    }
+    .footersocialmedia {
+      margin: 1em auto;
+    }
+    .footconmenu {
+      margin: 0 1.5em;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .manualslides {
+      height: fit-content;
+    }
+    .mySlides img{
+      height: fit-content;
+    }
+    .footmenu{
+      flex-direction: column;
+    }
+    .footermenu li {
+      padding: .5em;
+    }
+    .submenu .dropdownmenu {
+      min-width: 150px;
+      padding: .5em;
+    }
+    .footersocialmedia .bx {
+      margin: .25em .5em;
+      padding: .5em;
+    }
+    .footermenu{
+      flex-direction: column;
+    }
+ 
+    .footcontact {
+      padding: .5em 0;
+    }
+    .copyrights {
+      display: flex;
+      flex-direction: column;
+      padding: .7em 0;
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .copyrights a {
+      padding: 0;
+    }
+    .copyrights span{
+      display: none;
+    }
+    .copyrights p {
+      padding: 0;
+    }
   }
