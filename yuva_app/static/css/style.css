@@ -166,6 +166,18 @@
     min-height: 60vh;
     overflow: hidden;
   }
+  .slide-1 {
+    background-image: url("/static/assets/images/contactimage.webp");
+  }
+  .slide-2 {
+    background-image: url("/static/assets/images/feeimage.webp");
+  }
+  .slide-3 {
+    background-image: url("/static/assets/images/bagsdistritnimg.webp");
+  }
+  .slide-4 {
+    background-image: url("/static/assets/images/covidimage.webp");
+  }
   .slides-container {
     position: relative;
     width: 100%;
