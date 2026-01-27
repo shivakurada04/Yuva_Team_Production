@@ -67,7 +67,7 @@
                      alt="Profile Image"
                      onclick="document.getElementById('profileUpload').click()"
                      title="Click to change photo"
-                     onerror="this.onerror=null;this.src='{% static 'assets/images/logo.png' %}';">
+                     onerror="this.onerror=null;this.src='{% static &quot;assets/images/logo.png&quot; %}';">
             </div>
             
             <input type="file" id="profileUpload" name="profile_picture" accept="image/*" hidden onchange="console.log('File selected')">

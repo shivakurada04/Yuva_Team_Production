@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+
     window.addEventListener('click', () => {
         document.querySelectorAll(".dropdownmenu").forEach(m => m.classList.remove('show'));
     });
@@ -222,6 +223,26 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
         return cookieValue;
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const passwordInput = document.getElementById("password");
+    const eyeIcon = document.getElementById("eyeIcon");
+    const eyeClosedIcon = document.getElementById("eyeSlashIcon");
+
+
+    if (eyeClosedIcon && eyeIcon && passwordInput) {
+        eyeClosedIcon.addEventListener("click", () => {
+            passwordInput.type = "text";
+            eyeIcon.style.display = "inline";
+            eyeClosedIcon.style.display = "none";
+        });
+        eyeIcon.addEventListener("click", () => {
+            passwordInput.type = "password";
+            eyeIcon.style.display = "none";
+            eyeClosedIcon.style.display = "inline";
+        });
     }
 });
 

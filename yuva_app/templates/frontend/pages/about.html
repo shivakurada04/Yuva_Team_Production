@@ -108,7 +108,7 @@
             <div class="aboutvision">
                     <div>
                         <h3>Our Vision</h3>
-                        <p id="mission">To create a society where every person, especially the youth, has the strength, opportunity, and motivation to shape a better and more inclusive future.</p>
+                        <p id="mission">To create a society where every person, especially the youth, has the strength, opportunity, and motivation to shape a better and more inclusive future. We strive for a world where young minds are inspired to dream, guided to act, and supported to overcome challenges, ensuring equality, dignity, and hope for all.</p>
                     </div>
                     <img src="{% static 'assets/images/Screenshot__48_-removebg-preview.png' %}">
             </div>
@@ -116,7 +116,7 @@
                 <img src="{% static 'assets/images/Screenshot__46_-removebg-preview.png' %}">
                 <div>
                 <h3>Our Mission</h3>
-                <p id="story">To empower young minds and uplift communities by promoting education, equality, and social responsibility.</p>
+                <p id="story">To create a society where every person, especially the youth, has the strength, opportunity, and motivation to shape a better and more inclusive future. We strive for a world where young minds are inspired to dream, guided to act, and supported to overcome challenges, ensuring equality, dignity, and hope for all.</p>
                 </div>
             </div>
         </section>
@@ -134,7 +134,7 @@
         <section class="aboutfounder animate-on-scroll slide-in-up">
             <div>
                 <h2 id="team">Founder Words</h2>
-                <p>“I believe that education is the strongest foundation for meaningful change. Through this organization, my vision is to empower young minds, support underserved communities, and create opportunities that inspire confidence, equality, and hope."</p>
+                <p>“I believe that education is the strongest foundation for meaningful change. Through this organization, my vision is to empower young minds, support underserved communities, and create opportunities that inspire confidence, equality, and hope. Every initiative we undertake is a step toward building a more inclusive and compassionate society."</p>
             </div>
             <div class="found">
             <img src="{% static 'assets/images/WhatsApp Image 2026-01-11 at 3.04.09 PM.jpeg' %}">
@@ -154,33 +154,32 @@
         </section>
     </main>
 
-    <footer class="footer">
+    <footer>
         <div class="footerdetails">
             <div class="footerlogoname">
                 <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
                 <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
-                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p>
-                
+                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
                 <div class="footersocialmedia">
-                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"></a>
-                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"></a>
-                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"></a>
-                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"></a>
-                    
+                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
+                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
+                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
+                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
                     <div id="callPopup" class="popup">
                         <div class="popup-content">
                             <h3>Contact Us</h3>
                             <p id="phoneNumber">+91 9010455221</p>
+
                             <div class="popup-actions">
                                 <a href="tel:+919010455221" class="btn call">Call</a>
                                 <button class="btn copy" onclick="copyNumber()">Copy</button>
                             </div>
+
                             <span class="close" onclick="closePopup()">×</span>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <div class="footconmenu">
                 <ul class="footmenu">
                     <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
@@ -188,6 +187,9 @@
                         <li><a href="{% url 'about' %}#overview">Overview</a></li>
                         <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
                         <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
+                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
                     </ul></li>
                     <li><span>WHAT WE DO</span><ul>
                         <li><a href="{% url 'education' %}">School Education</a></li>
@@ -196,6 +198,8 @@
                     </ul></li>
                     <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
                         <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
+                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
+                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
                     </ul></li>
                     <li><span>GET IN TOUCH</span>
                         <ul>

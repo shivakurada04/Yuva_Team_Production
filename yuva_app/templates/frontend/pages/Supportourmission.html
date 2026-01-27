@@ -84,28 +84,28 @@
             <h3>Create Your Account</h3>
             <div class="form-grid">
                 <div class="auth-form-group">
-                    <label>First Name*</label>
-                    <input type="text" id="reg-firstname" name="firstname" required>
+                    <label>First Name <span class="mandatoryfield">*</span></label>
+                    <input type="text" id="reg-firstname" name="firstname"  placeholder="Jhon" required>
                 </div>
                 <div class="auth-form-group">
-                    <label>Last Name*</label>
-                    <input type="text" id="reg-lastname" name="lastname" required>
+                    <label>Last Name <span class="mandatoryfield">*</span></label>
+                    <input type="text" id="reg-lastname" name="lastname" placeholder="Leo" required>
                 </div>
                 <div class="auth-form-group" style="grid-column: span 2;">
-                    <label>DOB*</label>
+                    <label>DOB <span class="mandatoryfield">*</span></label>
                     <input type="date" id="reg-dob" name="dob" required>
                 </div>
-                <div class="auth-form-group">
-                    <label>Gender*</label>
+                <div class="auth-form-group1">
+                    <label>Gender <span class="mandatoryfield">*</span></label>
                     <select id="reg-gender" name="gender" required>
-                        <option value="">Select...</option>
+                        <option value="">Select Gender...</option>
                         <option>Male</option><option>Female</option><option>Others</option>
                     </select>
                 </div>
-                <div class="auth-form-group">
-                    <label>Blood Group*</label>
+                <div class="auth-form-group1">
+                    <label>Blood Group <span class="mandatoryfield">*</span></label>
                     <select id="reg-bloodgrp" name="bloodgrp" required>
-                        <option value="">Select...</option>
+                        <option value="">Select Blood Group...</option>
                         <option>A+</option><option>A-</option>
                         <option>B+</option><option>B-</option>
                         <option>O+</option><option>O-</option>
@@ -113,19 +113,19 @@
                     </select>
                 </div>
                 <div class="auth-form-group">
-                    <label>Email*</label>
-                    <input type="email" id="reg-email" name="email" required>
+                    <label>Email <span class="mandatoryfield">*</span></label>
+                    <input type="email" id="reg-email" name="email" placeholder="jhon@gmail.com" required>
                 </div>
                 <div class="auth-form-group">
-                    <label>Phone*</label>
+                    <label>Phone <span class="mandatoryfield">*</span></label>
                     <input type="tel" id="reg-phone" name="phone" required>
                 </div>
                 <div class="auth-form-group" style="grid-column: span 2;">
-                    <label>Address*</label>
-                    <input type="text" id="reg-address" name="address" required>
+                    <label>Address <span class="mandatoryfield">*</span></label>
+                    <input type="text" id="reg-address" name="address" placeholder="Flat.No, Village, City, State, Country" required>
                 </div>
                 <div class="auth-form-group" style="grid-column: span 2;">
-                    <label>Account Status*</label>
+                    <label>Account Status <span class="mandatoryfield">*</span></label>
                     <div class="radio-groupsts">
                         <label><input type="radio" name="status" value="active" checked> Active</label>
                         <label><input type="radio" name="status" value="inactive"> Inactive</label>
@@ -162,9 +162,7 @@
 </div>
             {% endif %}
 
-            <div class="donationform" id="onetime-form" 
-                 style="{% if user.is_authenticated %}display: block;{% else %}display: none;{% endif %}">
-                
+           <div class="donationform {% if not user.is_authenticated %}hidden{% endif %}" id="onetime-form">
                 <div style="text-align: center; padding: 20px;">
                     {% if user.is_authenticated %}
                         <h3 class="section-heading">Welcome, {{ user.first_name }}!</h3>
@@ -196,7 +194,7 @@
 </section>
     </main>
 
-    <footer class="footer">
+    <footer>
         <div class="footerdetails">
             <div class="footerlogoname">
                 <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
