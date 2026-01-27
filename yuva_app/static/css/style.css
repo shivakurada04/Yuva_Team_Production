@@ -954,6 +954,9 @@
     margin: 0.5em auto;
     text-align: center;
   }
+  .hidden {
+  display: none;
+  }
   .progress-bar-container {
     width: 100%;
     max-width: 800px;
@@ -1202,7 +1205,7 @@
   }
   #loginbtn:hover,
   .frgtform button:hover {
-    background: #b80202;
+    background: #e90808 !important;
   }
   .linkbckfp {
     padding-top: .7em;
@@ -2025,11 +2028,10 @@
     font-weight: 700;
   }
   /* .footer */
-  .footer {
+  footer {
     width: 100%;
     background-color: #fdfdfb;
     padding: 1.5em 3em 0;
-    display: flex;
   }
   .footerdetails {
     padding-bottom: 1em;
