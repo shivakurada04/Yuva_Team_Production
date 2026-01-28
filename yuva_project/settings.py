@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import sys
+# This MUST be the first line to prioritize your venv
+sys.path.insert(0, '/var/www/Yuva_Team_Production/venv/lib/python3.12/site-packages')
+
 import os
-
-
+from pathlib import Path
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-mtsz#bx0s2(y!hhx=gt808sf0^3f#6ibcdeot-#4pmvjjh1yzu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['yuvateam.org', 'www.yuvateam.org', '82.29.162.71']
 
 
 # Application definition
@@ -72,10 +75,7 @@ TEMPLATES = [
 ]
 
 # --- DEBUG: Print the path to verify it matches your folder ---
-print("----------------------------------------------------------------")
-print("DJANGO IS LOOKING FOR TEMPLATES HERE:")
-print(BASE_DIR / 'yuva_app' / 'templates')
-print("----------------------------------------------------------------")
+
 WSGI_APPLICATION = 'yuva_project.wsgi.application'
 
 
@@ -136,7 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
     BASE_DIR / "yuva_app" / "static",
 ]
@@ -154,6 +154,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_HOST_USER = 'yuvateam2009@gmail.com'
 EMAIL_HOST_PASSWORD = 'vrjg ebbo yxbc tvgz' #  App Password,
 DEFAULT_FROM_EMAIL = 'yuvateam2009@gmail.com'
