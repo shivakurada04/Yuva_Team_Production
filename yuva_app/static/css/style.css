@@ -3027,12 +3027,12 @@ button:hover {
 /* White Content Area */
 
 .profile-content-area {
-    background: #ffffff;
+    background: #fff;
     padding: 10px;
     display: flex;
     gap: 30px;
     min-height: 100vh;
-    width: 1400px;
+    width: 1300px;
 }
 
 .profile-card {
