@@ -73,32 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Run tab check on page load
     handleMemberDonation();
 
-const img = document.getElementById("displayProfileImg");
-const input = document.getElementById("profileUpload");
-
-
-img.addEventListener("click", () => input.click());
-
-
-input.addEventListener("change", () => {
-const file = input.files[0];
-if (!file) return;
-
-
-// Preview image instantly
-const reader = new FileReader();
-reader.onload = e => {
-img.src = e.target.result;
-};
-reader.readAsDataURL(file);
-
-
-// Auto submit form
-setTimeout(() => {
-input.closest("form").submit();
-}, 300);
-});
-
     // Manual Sidebar Tab Switching
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
