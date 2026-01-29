@@ -58,23 +58,20 @@
 
                     <div class="profile-content-area">
                         <form method="POST" action="{% url 'user_profile' %}" enctype="multipart/form-data" class="form-mem" >
-                    
-                    <form method="POST" enctype="multipart/form-data" action="{% url 'user_profile' %}">
-                        {% csrf_token %}
-
-                        <div class="profile-img-wrapper">
-                            <img id="displayProfileImg"
-                                src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'assets/images/logo.png' %}{% endif %}"
-                                title="Click to change photo"
-                                style="cursor:pointer;border-radius:50%;width:140px;height:140px;object-fit:cover;">
-                        </div>
-
-                        <input type="file"
-                            id="profileUpload"
-                            name="profile_picture"
-                            accept="image/*"
-                            hidden>
-                    </form>
+        {% csrf_token %}
+        
+        <div class="profile-card">
+            <div class="profile-img-wrapper">
+                <img id="displayProfileImg"
+                     src="{% if user.profile_picture %}{{ user.profile_picture.url }}{% else %}{% static 'assets/images/logo.png' %}{% endif %}"
+                     alt="Profile Image"
+                     onclick="document.getElementById('profileUpload').click()"
+                     title="Click to change photo"
+                     onerror="this.onerror=null;this.src='{% static &quot;assets/images/logo.png&quot; %}';">
+            </div>
+            
+            <input type="file" id="profileUpload" name="profile_picture" accept="image/*" hidden onchange="console.log('File selected')">
+            
             <h3 id="profile-name" class="profile-name">{{ user.first_name }} {{ user.last_name }}</h3>
             <p class="member-since">Member since {{ user.date_joined|date:"Y" }}</p>
             <hr class="divider">
