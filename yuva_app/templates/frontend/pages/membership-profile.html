@@ -67,7 +67,7 @@
                      alt="Profile Image"
                      onclick="document.getElementById('profileUpload').click()"
                      title="Click to change photo"
-                     onerror="this.onerror=null;this.src='{% static &quot;assets/images/logo.png&quot; %}';">
+                     onerror="this.onerror=null;this.src='{% static 'assets/images/logo.png' %}';">
             </div>
             
             <input type="file" id="profileUpload" name="profile_picture" accept="image/*" hidden onchange="console.log('File selected')">
@@ -177,7 +177,7 @@
     </div>
     
 
-    <footer class="footer">
+    <footer class="memberfooter" >   
         <div class="copyrights">
           <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
           <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>

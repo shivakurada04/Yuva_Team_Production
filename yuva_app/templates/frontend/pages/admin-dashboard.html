@@ -117,6 +117,7 @@
 
 <div class="modal" id="articleModal">
   <div class="modal-content">
+    <span class="close-modal" id="closeMemberModal"  onclick="closeModal()">&times;</span>
     <h3>Publish Article</h3>
     <input type="text" id="articleTitle" placeholder="Title" />
     
@@ -133,6 +134,7 @@
 
 <div class="modal" id="eventModal">
   <div class="modal-content">
+    <span class="close-modal" id="closeMemberModal"  onclick="closeModal()">&times;</span>
     <h3>Add Event</h3>
     <input type="text" id="eventTitle" placeholder="Event Name" />
     <input type="date" id="eventDate" />
@@ -147,65 +149,68 @@
     </div>
   </div>
 </div>
-</section>
-</main>
-<footer>
-        <div class="footerdetails">
-            <div class="footerlogoname">
-                <img src="{% static 'assets/images/logo.png' %}" class="footerlogo">
-                <h1>YUV<span class="footletterspan">A</span> TEAM</h1>
-                <p class="footer-lines">Empowering underprivileged youth through education and community service.</p><p>Join us in creating opportunities and transforming lives.</p>
-                <div class="footersocialmedia">
-                    <a href="https://www.facebook.com/yuvateem" target="_blank"><img src="{% static 'assets/images/social_12234051.png' %}" class="bx"> </a>
-                    <a href="https://www.instagram.com/yuva_team_bhongir/" target="_blank"><img src="{% static 'assets/images/social_15707869.png' %}" class="bx"> </a>
-                    <a href="mailto:yuvateam2009@gmail.com"><img src="{% static 'assets/images/google_16509529.png' %}" class="bx mail-icon"> </a>
-                    <a href="" class="phone-icon" onclick="openPopup()"><img src="{% static 'assets/images/circle_16617786.png' %}" class="bx"> </a>
-                    <div id="callPopup" class="popup">
-                        <div class="popup-content">
-                            <h3>Contact Us</h3>
-                            <p id="phoneNumber">+91 9010455221</p>
-
-                            <div class="popup-actions">
-                                <a href="tel:+919010455221" class="btn call">Call</a>
-                                <button class="btn copy" onclick="copyNumber()">Copy</button>
-                            </div>
-
-                            <span class="close" onclick="closePopup()">×</span>
-                        </div>
+<div class="addmember" id="memberModel">
+ <form id="register-flow-form">
+        <div>
+            <h3>Create Your Account</h3>
+            <div class="form-grid">
+                <div class="auth-form-group">
+                    <label>First Name <span class="mandatoryfield">*</span></label>
+                    <input type="text" id="reg-firstname" name="firstname"  placeholder="Jhon" required>
+                </div>
+                <div class="auth-form-group">
+                    <label>Last Name <span class="mandatoryfield">*</span></label>
+                    <input type="text" id="reg-lastname" name="lastname" placeholder="Leo" required>
+                </div>
+                <div class="auth-form-group" style="grid-column: span 2;">
+                    <label>DOB <span class="mandatoryfield">*</span></label>
+                    <input type="date" id="reg-dob" name="dob" required>
+                </div>
+                <div class="auth-form-group1">
+                    <label>Gender <span class="mandatoryfield">*</span></label>
+                    <select id="reg-gender" name="gender" required>
+                        <option value="">Select Gender...</option>
+                        <option>Male</option><option>Female</option><option>Others</option>
+                    </select>
+                </div>
+                <div class="auth-form-group1">
+                    <label>Blood Group <span class="mandatoryfield">*</span></label>
+                    <select id="reg-bloodgrp" name="bloodgrp" required>
+                        <option value="">Select Blood Group...</option>
+                        <option>A+</option><option>A-</option>
+                        <option>B+</option><option>B-</option>
+                        <option>O+</option><option>O-</option>
+                        <option>AB+</option><option>AB-</option>
+                    </select>
+                </div>
+                <div class="auth-form-group">
+                    <label>Email <span class="mandatoryfield">*</span></label>
+                    <input type="email" id="reg-email" name="email" placeholder="jhon@gmail.com" required>
+                </div>
+                <div class="auth-form-group">
+                    <label>Phone <span class="mandatoryfield">*</span></label>
+                    <input type="tel" id="reg-phone" name="phone" required>
+                </div>
+                <div class="auth-form-group" style="grid-column: span 2;">
+                    <label>Address <span class="mandatoryfield">*</span></label>
+                    <input type="text" id="reg-address" name="address" placeholder="Flat.No, Village, City, State, Country" required>
+                </div>
+                <div class="auth-form-group" style="grid-column: span 2;">
+                    <label>Account Status <span class="mandatoryfield">*</span></label>
+                    <div class="radio-groupsts">
+                        <label><input type="radio" name="status" value="active" checked> Active</label>
+                        <label><input type="radio" name="status" value="inactive"> Inactive</label>
                     </div>
                 </div>
-            </div>
-            <div class="footconmenu">
-                <ul class="footmenu">
-                    <li><a href="{% url 'about' %}"><span>ABOUT US</span></a>
-                    <ul>
-                        <li><a href="{% url 'about' %}#overview">Overview</a></li>
-                        <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
-                        <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
-                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
-                        <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
-                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
-                    </ul></li>
-                    <li><span>WHAT WE DO</span><ul>
-                        <li><a href="{% url 'education' %}">School Education</a></li>
-                        <li><a href="{% url 'blood_donation' %}">Blood Donation</a></li>
-                        <li><a href="{% url 'social_awareness' %}">Social Awareness</a></li>
-                    </ul></li>
-                    <li><a href="{% url 'events' %}"><span>OUR EVENTS</span></a><ul>
-                        <li><a href="{% url 'events' %}#live-events">Live Events</a></li>
-                        <li><a href="{% url 'events' %}#event-activities">Event Activities</a></li>
-                        <li><a href="{% url 'events' %}#newscoverage">Newspaper Coverage</a></li>
-                    </ul></li>
-                    <li><span>GET IN TOUCH</span>
-                        <ul>
-                        <li><a href="{% url 'support' %}">Support Us</a></li>
-                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                 <a href="{% url 'support' %}#onetime-form" class="donatebtn">Donate Now</a>
+                <button type="button" id="send-otp-btn" class="formsubmit" style="grid-column: span 2;">Create User</button>
             </div>
         </div>
+  </form>
+</div>
+</section>
+
+</main>
+<footer class="memberfooter" >   
         <div class="copyrights">
           <a href="{% url 'disclaimer' %}">Disclaimer</a><span>|</span>
           <a href="{% url 'privacy_policy' %}">Privacy Policy</a><span>|</span>

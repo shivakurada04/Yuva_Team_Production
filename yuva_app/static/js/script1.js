@@ -244,7 +244,52 @@ document.addEventListener("DOMContentLoaded", function () {
             eyeClosedIcon.style.display = "inline";
         });
     }
+
+
+
+    const phoneIcon = document.querySelector(".phone-icon");
+    const popup = document.getElementById("callPopup");
+    const closeBtn = document.querySelector(".close");
+    const copyBtn = document.querySelector(".copy");
+    const phoneNumber = document.getElementById("phoneNumber");
+
+    if(phoneIcon && popup) {
+        phoneIcon.addEventListener("click", (e) => { e.preventDefault(); popup.style.display = "block"; });
+        closeBtn.addEventListener("click", () => popup.style.display = "none");
+        copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(phoneNumber.innerText);
+            copyBtn.innerText = "Copied ✓";
+            setTimeout(() => copyBtn.innerText = "Copy", 2000);
+        });
+        popup.addEventListener("click", (e) => { if (e.target === popup) popup.style.display = "none"; });
+    }
+   
+
+
+     const slideshow = document.querySelector('.hero-slideshow');
+    if (slideshow) {
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        let slideInterval;
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+            currentSlide = index;
+        }
+        function startSlideshow() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(() => {
+                showSlide((currentSlide + 1) % slides.length);
+            }, 3000);
+        }
+        slideshow.addEventListener('mouseenter', () => clearInterval(slideInterval));
+        slideshow.addEventListener('mouseleave', startSlideshow);
+        showSlide(0);
+        startSlideshow();
+    }
 });
+
+
 
 /* --- TOAST NOTIFICATION LOGIC --- */
 function showToast(message, type = 'success') {
@@ -809,7 +854,10 @@ window.publishArticle = async () => {
         }
     }
 };
-
+window.openEventForm = () => {
+    const modal = document.getElementById('eventModal');
+    if (modal) modal.style.display = 'flex';
+};
 // 3. ADD EVENT
 window.addEvent = async () => {
     const title = document.getElementById('eventTitle').value;
@@ -1021,5 +1069,4 @@ if (finalizeBtn) {
         });
     });
 }
-
 

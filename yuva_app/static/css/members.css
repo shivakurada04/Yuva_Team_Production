@@ -180,7 +180,6 @@
   margin-bottom: 20px;
   text-align: center;
   font-size: 40px;
-  border-bottom: 1px solid rgba(255,255,255,0.3);
   padding-bottom: 4px;
 }
 .profile-wrapper {
@@ -259,7 +258,7 @@
     padding: 40px;
     gap: 30px;
     min-height: 60vh;
-    width: 1400px;
+    width: 1300px;
 }
 
 .profile-card {
@@ -513,172 +512,10 @@
     gap: 10px;
     justify-content: center;
 }
-
-.memberfooter {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2em 0;
-    font-size: 1.05em;
-    font-weight: 700;
-}
-footer {
-    width: 100%;
+.copyrights {
+  border-top: 5px solid #FFD700;
+   padding: .5em 1em;
     background-color: #fdfdfb;
-    padding: 1.5em 3em 0;
-  }
-  .footerdetails {
-    padding-bottom: 1em;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3em;
-  }
-  .footerlogo {
-    width: 25%;
-    padding: 0;
-  }
-  .footerlogoname h1 {
-    font-size: 1.1rem;
-    padding: 0 0 0 .25em;
-  }
-  .footletterspan {
-    margin: -7px;
-  }
-  footer .footer-lines {
-    padding: 1em 0;
-  }
-  .footersocialmedia {
-    margin: .8em 0;
-  }
-  .footersocialmedia a {
-    text-decoration: none;
-  }
-  .footersocialmedia .bx {
-    margin: .5em;
-    transition: transform 0.3s ease;
-  }
-  .footersocialmedia .bx:hover {
-    transform: scale(1.1);
-  }
-  .footersocialmedia img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    border-radius: 50%;
-  }
-  .mail-icon {
-    border: 1px solid #e60000;
-    padding: .12em;
-  }
-  .popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 10;
-  }
-  .popup-content {
-    background: #fff;
-    width: 300px;
-    height: 180px;
-    padding: 20px;
-    margin: auto;
-    margin-top: 20%;
-    border-radius: 8px;
-    text-align: center;
-    position: relative;
-  }
-  .popup-content h3 {
-    font-family: var(--font-heading);
-    color: #e60000;
-    font-size: 1.3em;
-  }
-  .popup-content p {
-    padding: 1em;
-    font-size: 1.2em;
-    font-family: var(--font-body);
-    font-weight: 600;
-  }
-  .popup-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-  .btn {
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
-  .call {
-    background: #e60000;
-    color: #fff;
-    text-decoration: none;
-    padding: .5em 1.5em;
-  }
-  .copy {
-    background: #FFD700;
-    font-family: var(--font-body);
-    font-weight: 600;
-    padding: .5em 2em;
-  }
-  .close {
-    position: absolute;
-    top: 1px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 25px;
-  }
-  .footconmenu {
-    display: flex;
-    gap: 4em;
-  }
-  .footmenu {
-    padding: 1em 0;
-    display: flex;
-    gap: 3em;
-  }
-  .footmenu li {
-    list-style: none;
-    padding: .2em 0;
-  }
-  .footconmenu a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-  }
-  .footmenu a {
-    text-decoration: none;
-    color: #000;
-    font-size: .95rem;
-  }
-  .footmenu span {
-    border-bottom: 1px solid #e60000;
-    font-size: 1em;
-    font-weight: 600;
-  }
-  .footmenu a:hover {
-    font-weight: 500;
-    color: #e60000;
-  }
-  .donatebtn {
-    background-color: #e60000;
-    border-radius: 1.5em;
-    padding: .5em;
-    width: 113px;
-    height: 40px;
-    margin-top: 2em;
-  }
-  .donatebtn:hover {
-    background-color: #fff;
-    border: 2px solid #e60000;
-    color: #e60000;
-    font-weight: normal;
-  }
-  .copyrights {
-    border-top: 1px solid #FFD700;
     padding: 1em 0;
     display: flex;
     justify-content: center;
@@ -690,6 +527,9 @@ footer {
     padding: 0 2em;
     font-family: var(--font-body);
     font-weight: 600;
+  }
+  .copyrights a:hover{
+    font-weight: 700;
   }
   .copyrights p {
     padding: 0 2em;

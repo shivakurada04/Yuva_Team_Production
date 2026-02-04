@@ -7,10 +7,23 @@
     <meta name="description" content="YUVA Team is dedicated to empowering youth and communities through education support, social awareness programs, and humanitarian initiatives in Telangana.">
     <link rel="icon" href="{% static 'assets/images/logo.png' %}">
     <title>About YUVA – Education & Youth Development Programs</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload"  href="{% static 'css/style.css' %}" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    </noscript>
+    <link rel="preload"
+          href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          as="style"
+          onload="this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    </noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts (non-blocking) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
@@ -50,18 +63,19 @@
     </header>    
     
     <main>
-        <section>
-            <div class="manualslides image-slide">
-                <div class="mySlides">
-                        <h1>About Us</h1>
-                        <img class="slides" src="{% static 'assets/images/aboutimg5.webp' %}">
-                </div>
+        <section class="about-hero">
+            <div class="hero-overlay"></div>
+
+            <div class="abouthero-content">
+                <h1>About YUVA</h1>
+                <p>Empowering students through education, care, and community support</p>
+                <a href="{% url 'contact' %}" class="hero-btn">Get In Touch</a>
             </div>
         </section>
         
         <section class="aboutoverview" id="overview">
             <div>
-                <h2>Overview</h2>
+                <h1>Overview</h1>
                 <p class="over">Yuva is a non-profit social organization founded in 2009 by a group of passionate individuals who shared a common dream — to create a positive difference in society.
                 What started as a small team with big hearts has grown into a community-driven organization dedicated to <span class="abouttextcolor1">supporting education,</span> <span class="abouttextcolor1">empowering youth,</span> <span class="abouttextcolor1">and helping people in need.</span></p>
                 
@@ -71,40 +85,25 @@
                     </div>
                     
                     <div class="abouteach">
-                        <h2>Educational Support</h2>   
-                        <p>Education is the foundation of growth, and we believe no child should be left behind because of financial struggles.
-                        Yuva identifies students from underprivileged backgrounds and provides them with essential learning materials such as notebooks, textbooks, exam pads, pens, and school bags.</p>
-                        <p>We also support children who face difficulties in paying school or college fees by offering funding assistance through contributions from well-wishers and community donors.</p>
-                        
-                        <h2>Funding Assistance</h2>
-                        <p>Many young students with talent and determination are forced to discontinue their education due to a lack of financial support. Yuva steps in to bridge that gap.
-                        Through our funding programs, we sponsor school and tuition fees, help with exam registration costs, and provide educational tools or uniforms when needed.</p>
-                        
-                        <h2>Community Help & Welfare</h2>
-                        <p>Yuva works actively to support families in need by providing daily essentials, clothes, groceries, and hygiene materials.
-                        We organize donation drives and distribute basic necessities to low-income households, elderly individuals, and people facing hardship.</p>
-                        
-                        <h2>Health & COVID-19 Relief</h2>
-                        <p>Health is a vital part of community well-being, and Yuva has consistently taken steps to promote health awareness and support.
-                        During the COVID-19 pandemic, our team worked tirelessly to provide food packets, masks, sanitizers, and medicines to affected families and frontline workers.</p>
-                        
-                        <h2>Social and Environmental Work</h2>
-                        <p id="vision">Yuva believes that protecting the environment is as important as uplifting people.
-                        We regularly conduct clean-up campaigns, tree plantation drives, and environmental awareness events in schools and public places.</p>
-                    </div>
-                    
+                        <h2>Education & Support</h2>
+                        <p>Providing students with notebooks, textbooks, pens, and school bags. Supporting tuition, exam fees, and uniforms to ensure every child can continue learning.</p>
+                        <h2>Community Welfare</h2>
+                        <p>Helping families in need with groceries, clothes, and hygiene essentials. Volunteers visit communities to understand their needs and provide support where it’s most needed.</p>
+                        <h2>Health & Relief</h2>
+                        <p>Promoting health awareness and organizing health camps, blood donation drives, and emergency relief programs, including support during COVID-19.</p>
+                        <h2 id="vision">Environment</h2>
+                        <p>Conducting clean-up drives, tree plantations, and awareness programs in schools and public spaces to encourage eco-friendly habits.</p>
+
+                    </div>  
                     <div class="stickyimage">
-                        <img class="slides" src="{% static 'assets/images/contactimage.webp' %}" alt="Volunteers distributing books">
-                        <img class="slides" src="{% static 'assets/images/feeimage.webp' %}" alt="Volunteers giving financial support">
-                        <img class="slides" src="{% static 'assets/images/bagsdistritnimg.webp' %}" alt="School bag distribution">
-                        <img class="slides" src="{% static 'assets/images/covidimage.webp' %}" alt="COVID-19 relief efforts">
-                        <img class="slides" src="{% static 'assets/images/5krunimg.webp' %}" alt="Charity 5K run event">
+                        <img class="slides" src="{% static 'assets/images/feeimage.webp' %}" alt="Volunteers giving financial support for Students">
+                        <img class="slides" src="{% static 'assets/images/covidimage.webp' %}" alt="Volunteers giving financial support for Students">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="aboutvismission animate-on-scroll slide-in-up">
+        <section class="aboutvismission animate-on-scroll slide-in-left">
             <div class="aboutvision">
                     <div>
                         <h3>Our Vision</h3>
@@ -116,40 +115,73 @@
                 <img src="{% static 'assets/images/Screenshot__46_-removebg-preview.png' %}">
                 <div>
                 <h3>Our Mission</h3>
-                <p id="story">To create a society where every person, especially the youth, has the strength, opportunity, and motivation to shape a better and more inclusive future. We strive for a world where young minds are inspired to dream, guided to act, and supported to overcome challenges, ensuring equality, dignity, and hope for all.</p>
+                <p id="story">To empower young minds and uplift communities by promoting education, equality, and social responsibility.We focus on providing quality educational opportunities, guidance, and resources to those in need.Through inclusive initiatives, we work to create lasting impact and a brighter future for all.</p>
                 </div>
             </div>
         </section>
 
-        <section class="aboutstory animate-on-scroll slide-in-up">
-            <h2 id="impact">Our Story</h2>
-            <p>The journey of Yuva began when a small group of friends decided to take action instead of waiting for change. They started by helping students who couldn’t afford school essentials and later extended their efforts to broader social causes.</p>
-        </section>
-
-        <section class="aboutimpact animate-on-scroll slide-in-up" id="founder">
-            <h2>Our Impact</h2>
-            <p>Yuva has reached hundreds of students and families through its initiatives — spreading hope, kindness, and opportunity where it’s needed most.</p>
-        </section>
-
-        <section class="aboutfounder animate-on-scroll slide-in-up">
+         <section class="aboutfounder animate-on-scroll slide-in-up">
             <div>
-                <h2 id="team">Founder Words</h2>
-                <p>“I believe that education is the strongest foundation for meaningful change. Through this organization, my vision is to empower young minds, support underserved communities, and create opportunities that inspire confidence, equality, and hope. Every initiative we undertake is a step toward building a more inclusive and compassionate society."</p>
+                <h2>Our Story & Founder</h2>
+                <p>Yuva began with a simple belief — change happens when people come together to help others. It started by supporting students who lacked basic learning resources. Over time, more volunteers joined and our work expanded to community support, health initiatives, and environmental care, guided by compassion and responsibility.</p>
+                <p class="founder-quote" id="impact">“I believe that education is the strongest foundation for meaningful change. Every initiative we undertake empowers young minds, supports underserved communities, and inspires hope.”  <span class="mandatoryfield">— Founder Words</span></p>
             </div>
-            <div class="found">
+           <div class="found">
             <img src="{% static 'assets/images/WhatsApp Image 2026-01-11 at 3.04.09 PM.jpeg' %}">
             <p class="founder-name">Sudhagani Raju</p>
             <p class="desg">Founder & Convenor</p>
             </div>
         </section>
 
+        <section class="aboutimpact animate-on-scroll slide-in-up">
+        <div class="impact-container">
+            <!-- Heading -->
+            <h3>Our Impact</h3>
+
+            <!-- Intro paragraph -->
+            <p class="impact-intro">
+                Our impact goes beyond numbers — it’s seen in students gaining confidence,
+                families receiving timely help, and communities coming together to support each other.
+            </p>
+       </div>
+        <!-- Impact areas -->
+        <div class="impact-areas">
+            <!-- Each area block -->
+            <div class="impact-block">
+                <h4>Education</h4>
+                <p>Students continue learning without fear, supported with materials and financial assistance.</p>
+            </div>
+
+            <div class="impact-block">
+                <h4>Community Welfare</h4>
+                <p>Families gain access to essentials like food, clothing, and hygiene support during difficult times.</p>
+            </div>
+
+            <div class="impact-block">
+                <h4>Health & Relief</h4>
+                <p>Aid during emergencies, health awareness programs, and community support have strengthened wellbeing.</p>
+            </div>
+
+            <div class="impact-block">
+                <h4>Environment</h4>
+                <p>Our clean-up drives and tree planting initiatives create greener, safer, and healthier communities.</p>
+            </div>
+        </div>
+
+        <!-- <p class="impact-conclusion">
+            Every small, consistent effort contributes to lasting change and inspires hope in the communities we serve.
+        </p> -->
+
+
+        </section>
+
         <section class="aboutteam animate-on-scroll slide-in-up">
-            <h2>Our Team</h2>
+            <h3>Our Team</h3>
             <p>Our strength lies in our team of passionate volunteers, coordinators, and youth leaders who dedicate their time and energy to serve society.</p>
         </section>
 
         <section class="aboutjoin animate-on-scroll slide-in-up" id="join">
-            <h2>Join Us</h2>
+            <h3>Join Us</h3>
             <p>Be a part of the change! Whether you want to volunteer, contribute resources, or collaborate with us, Yuva welcomes everyone who believes in making a difference. <span class="aboutjoinquote">Yuva — Empowering Lives, Inspiring Change.</span></p>
         </section>
     </main>
@@ -187,9 +219,8 @@
                         <li><a href="{% url 'about' %}#overview">Overview</a></li>
                         <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
                         <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
-                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story & Founder</a></li>
                         <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
-                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
                     </ul></li>
                     <li><span>WHAT WE DO</span><ul>
                         <li><a href="{% url 'education' %}">School Education</a></li>

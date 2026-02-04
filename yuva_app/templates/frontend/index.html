@@ -7,10 +7,23 @@
     <meta name="description" content="YUVA Team empowers communities in Telangana through education support, blood donation drives, social awareness programs, and youth development initiatives.">
     <link rel="icon" href="{% static 'assets/images/logo.png' %}">
     <title>Youth Empowerment Programs in Telangana | YUVA</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload"  href="{% static 'css/style.css' %}" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    </noscript>
+    <link rel="preload"
+          href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          as="style"
+          onload="this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    </noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts (non-blocking) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 </head>
 <body>
     <header>
@@ -55,22 +68,22 @@
         <section class="hero-slideshow">
             <div class="slides-container">
                 
-               <div class="slide active slide-1">
+               <div class="slide active" style="background-image: url('{% static 'assets/images/contactimage.webp' %}');">
                     <div class="hero-content">
                         <h1>Empowering Lives, Inspiring Change.</h1>
                     </div>
                 </div>
-                <div class="slide slide-2">
+                <div class="slide" style="background-image: url('{% static 'assets/images/feeimage.webp' %}');">
                  <div class="hero-content">
                         <h1>Support Education, Build Futures.</h1>
                     </div>
                 </div>
-                <div class="slide slide-3">
+                <div class="slide" style="background-image: url('{% static 'assets/images/bagsdistritnimg.webp' %}');">
                 <div class="hero-content">
                         <h1>Together We Make a Difference.</h1>
                     </div>
                 </div>
-                <div class="slide slide-4">
+                <div class="slide" style="background-image: url('{% static 'assets/images/covidimage.webp' %}');">
                 <div class="hero-content">
                         <h1>Join Us in Uplifting Communities.</h1>
                     </div>
@@ -204,9 +217,8 @@
                         <li><a href="{% url 'about' %}#overview">Overview</a></li>
                         <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
                         <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
-                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story & Founder</a></li>
                         <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
-                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
                     </ul></li>
                     <li><span>WHAT WE DO</span><ul>
                         <li><a href="{% url 'education' %}">School Education</a></li>
