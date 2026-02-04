@@ -7,10 +7,22 @@
     <meta name="description" content="YUVA Team promotes social awareness through cleanliness drives, health initiatives, and environmental programs across Telangana.">
     <link rel="icon" href="{% static 'assets/images/logo.png' %}">
     <title>Social Awareness Campaigns in Telangana | YUVA</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link href='https://cdn.boxicons.com/3.0.7/fonts/basic/boxicons.min.css' rel='stylesheet'>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900;1000&family=Open+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload"  href="{% static 'css/style.css' %}" as="style" onload="this.rel='stylesheet'">
+    <noscript>
+      <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    </noscript>
+    <link rel="preload"
+          href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+          as="style"
+          onload="this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
+    </noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts (non-blocking) -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@700;800;900&family=Open+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -87,7 +99,7 @@
             
             <section class="program-section animate-on-scroll slide-in-left">
                 <div class="image-area">
-                    <img src="{% static 'assets/images/drug1.png' %}" alt="Young people attending a drug awareness seminar.">
+                    <img src="{% static 'assets/images/DSC_0478.jpg' %}" alt="Young people attending a drug awareness seminar.">
                 </div>
                 <div class="content-area">
                     <h3>2K Run – National Voters Day</h3>
@@ -100,13 +112,12 @@
                 </div>
             </section>
 
-            
 
             <section class="program-section animate-on-scroll slide-in-left">
-                <div class="image-area stickyimage">
+                <div class="image-area stickyimage" id="socialimage">
                         <img class="slides" src="{% static 'assets/images/gogreen2.jpg' %}" alt="Volunteers planting trees in a park as part of a Go Green initiative.">
                         <img class="slides" src="{% static 'assets/images/socialactvty.webp' %}" alt="Volunteers planting trees in a park as part of a Go Green initiative.">
-                    </div>
+                </div>
                 <div class="content-area">
                     <h3 class="runhead">Go Green: Environmental Responsibility</h3>
                     <p class="runp">
@@ -149,9 +160,8 @@
                         <li><a href="{% url 'about' %}#overview">Overview</a></li>
                         <li><a href="{% url 'about' %}#vision">Our Vision</a></li>
                         <li><a href="{% url 'about' %}#mission">Our Mission</a></li>
-                        <li><a href="{% url 'about' %}#story">Our Story</a></li>
+                        <li><a href="{% url 'about' %}#story">Our Story & Founder</a></li>
                         <li><a href="{% url 'about' %}#impact">Our Impact</a></li>
-                        <li><a href="{% url 'about' %}#founder">Founder</a></li>
                     </ul></li>
                     <li><span>WHAT WE DO</span><ul>
                         <li><a href="{% url 'education' %}">School Education</a></li>

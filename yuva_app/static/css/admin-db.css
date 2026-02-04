@@ -170,7 +170,6 @@
 }
 
 .dashboardhead h2 {
-    padding-top: .8em;
     color: #ffe100;
     text-align: center;
     font-size: 3em;
@@ -402,7 +401,8 @@ td {
 .modal-content {
     background: white;
     width: 90%;
-    max-width: 400px;
+    max-width: 500px;
+    height: 62vh;
     margin: 10% auto;
     padding: 30px;
     border-radius: 15px;
@@ -417,6 +417,7 @@ td {
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 6px;
+    resize: none;
 }
 
 /* Buttons */
@@ -439,10 +440,117 @@ button:hover {
 }
 
 .cancel {
-    background: #ccc;
+    background-color: #cecece;
     padding: 5px 12px;
     border-radius: 3px;
-    color: #333;
+    font-size: 1rem;
+    color: #212121;
+}
+/* Overlay */
+.addmember {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Show modal */
+.addmember.active {
+  display: flex;
+}
+
+/* Modal box */
+.addmember form {
+  background: #fff;
+  width: 700px;
+  max-width: 95%;
+  padding: 25px 30px;
+  border-radius: 12px;
+  animation: scaleFade 0.3s ease;
+  position: relative;
+}
+
+/* Title */
+.addmember h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Grid layout */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Inputs */
+.auth-form-group input,
+.auth-form-group1 select {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.auth-form-group label,
+.auth-form-group1 label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.mandatoryfield {
+  color: red;
+}
+
+/* Radio group */
+.radio-groupsts {
+  display: flex;
+  gap: 20px;
+}
+
+/* Submit button */
+.formsubmit {
+  background: #2c7be5;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.formsubmit:hover {
+  background: #1a68d1;
+}
+
+/* Close button */
+.close-modal {
+  position: absolute;
+  top: 150px;
+  right: 450px;
+  font-size: 22px;
+  cursor: pointer;
+  color: #555;
+}
+
+/* Animation */
+@keyframes scaleFade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 /* Status Pills */
@@ -474,161 +582,10 @@ button:hover {
     text-align: center;
     margin-bottom: 30px;
 }
-footer {
-    width: 100%;
+.copyrights {
+  border-top: 5px solid #FFD700;
+   padding: .5em 1em;
     background-color: #fdfdfb;
-    padding: 1.5em 3em 0;
-  }
-  .footerdetails {
-    padding-bottom: 1em;
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3em;
-  }
-  .footerlogo {
-    width: 25%;
-    padding: 0;
-  }
-  .footerlogoname h1 {
-    font-size: 1.1rem;
-    padding: 0 0 0 .25em;
-  }
-  .footletterspan {
-    margin: -7px;
-  }
-  footer .footer-lines {
-    padding: 1em 0;
-  }
-  .footersocialmedia {
-    margin: .8em 0;
-  }
-  .footersocialmedia a {
-    text-decoration: none;
-  }
-  .footersocialmedia .bx {
-    margin: .5em;
-    transition: transform 0.3s ease;
-  }
-  .footersocialmedia .bx:hover {
-    transform: scale(1.1);
-  }
-  .footersocialmedia img {
-    width: 30px;
-    height: 30px;
-    object-fit: contain;
-    border-radius: 50%;
-  }
-  .mail-icon {
-    border: 1px solid #e60000;
-    padding: .12em;
-  }
-  .popup {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
-    z-index: 10;
-  }
-  .popup-content {
-    background: #fff;
-    width: 300px;
-    height: 180px;
-    padding: 20px;
-    margin: auto;
-    margin-top: 20%;
-    border-radius: 8px;
-    text-align: center;
-    position: relative;
-  }
-  .popup-content h3 {
-    font-family: var(--font-heading);
-    color: #e60000;
-    font-size: 1.3em;
-  }
-  .popup-content p {
-    padding: 1em;
-    font-size: 1.2em;
-    font-family: var(--font-body);
-    font-weight: 600;
-  }
-  .popup-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-  .btn {
-    padding: 8px 15px;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
-  }
-  .call {
-    background: #e60000;
-    color: #fff;
-    text-decoration: none;
-    padding: .5em 1.5em;
-  }
-  .copy {
-    background: #FFD700;
-    font-family: var(--font-body);
-    font-weight: 600;
-    padding: .5em 2em;
-  }
-  .close {
-    position: absolute;
-    top: 1px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 25px;
-  }
-  .footconmenu {
-    display: flex;
-    gap: 4em;
-  }
-  .footmenu {
-    padding: 1em 0;
-    display: flex;
-    gap: 3em;
-  }
-  .footmenu li {
-    list-style: none;
-    padding: .2em 0;
-  }
-  .footconmenu a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-  }
-  .footmenu a {
-    text-decoration: none;
-    color: #000;
-    font-size: .95rem;
-  }
-  .footmenu span {
-    border-bottom: 1px solid #e60000;
-    font-size: 1em;
-    font-weight: 600;
-  }
-  .footmenu a:hover {
-    font-weight: 500;
-    color: #e60000;
-  }
-  .donatebtn {
-    background-color: #e60000;
-    border-radius: 1.5em;
-    padding: .5em;
-    width: 113px;
-    height: 40px;
-    margin-top: 2em;
-  }
-  .donatebtn:hover {
-    background-color: #fff;
-    border: 2px solid #e60000;
-    color: #e60000;
-    font-weight: normal;
-  }
-  .copyrights {
-    border-top: 1px solid #FFD700;
     padding: 1em 0;
     display: flex;
     justify-content: center;
@@ -640,6 +597,9 @@ footer {
     padding: 0 2em;
     font-family: var(--font-body);
     font-weight: 600;
+  }
+  .copyrights a:hover{
+    font-weight: 700;
   }
   .copyrights p {
     padding: 0 2em;
